@@ -2,7 +2,7 @@
 
 ## Dimensions & Layout
 * **Footprint:** 2400mm x 1800mm (8x6 ft) internal structure, with cantilevered shelves.
-* **Rationale:** This is optimized for standard NZ plywood sheets (2400x1200mm). The floor will use exactly 1.5 sheets (one full sheet + one ripped in half lengthways) with zero offcuts.
+* **Rationale:** This is optimized for standard NZ plywood sheets (2400x1200mm). The main floor uses 1.5 sheets. The remaining half-sheet is used perfectly for the cantilever floors!
 
 ## Space Planning & Flock Capacity
 * **Flock Size:** Designed for 12-20 chickens.
@@ -17,7 +17,8 @@
 * **Placement (Wrapped within Floor):** The posts are positioned at exactly 2180mm wide by 1580mm deep (center-to-center). **Why?** This keeps the entire round posts completely *inside* the 2400x1800mm outer boundary of the floor framing. By wrapping the bearers and joists around the outside of the posts, the floor platform becomes the absolute outermost perimeter.
 
 ## Floor Framing & Walls
-* **Bearers (Uncut Cantilever):** Two 150x50mm timbers, bolted to the **outside** faces of the posts. We use **uncut 3.0m standard lengths**. Because the posts are set inwards, the bearers cantilever out past the side walls. This is an intentional design choice to eliminate waste from cutting, and provides an incredibly sturdy built-in cantilevered shelf to support the external nesting boxes on one side, and a porch on the other.
+* **Bearers (Uncut Cantilever):** Two 150x50mm timbers, bolted to the **outside** faces of the posts. We use **uncut 3.0m standard lengths**. Because the posts are set inwards, the bearers cantilever out past the side walls by 300mm on each side. This provides an incredibly sturdy built-in shelf to support the external nesting boxes on one side, and a porch/feeder platform on the other.
+* **Cantilever Flooring (Zero Waste):** The cantilever shelves are exactly 1800x300mm. We buy exactly two 2400x1200mm plywood sheets. Sheet 1 covers the back. Sheet 2 is ripped in half to make two 2400x600 pieces. One of those covers the front. The remaining 2400x600 piece is ripped in half again to make two 2400x300 pieces. These are trimmed to 1800mm, perfectly covering both side cantilevers with almost zero waste!
 * **Hardware Orientation (Safety):** The bearers are attached using M12 carriage bolts. The bolts are explicitly driven from the *outside in* — meaning the smooth, domed head sits on the exposed exterior of the bearer, and the sharp threaded tip and nut are safely hidden underneath the coop floorboards inside the post. This prevents injury to people and flock.
 * **Joists (470mm Spacing Rationale):** We use eight 150x50mm joists (1.7m long). Instead of using a standard 400mm or 600mm spacing from one end, the 2.35m internal bay is divided perfectly symmetrically into 5 bays of 470mm. **Why?** A traditional standard spacing would drop a joist exactly dead center, colliding with the carriage bolts on the center post. Because the floor uses exactly one uncut plywood sheet lengthwise, there are no sheet seams to match, so 470mm symmetrical spacing is structurally perfect.
 * **Joist Fastening (Hangers vs. End-Nailing):** The joists sit flush between the bearers and are supported by galvanized steel joist hangers rather than simply being "end-nailed". End-nailing relies entirely on the shear strength of nails in end-grain, which easily pulls out or splits. Joist hangers cup the joist in solid steel, safely transferring the gravity load to the bearer.
