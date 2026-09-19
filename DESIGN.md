@@ -19,7 +19,7 @@
 
 ## Floor Framing
 * **Bearers:** Two 150x50mm timbers running the 2.52m width, bolted to the *inside* faces of the posts.
-* **Joists:** Five 150x50mm timbers (1.7m long) spaced evenly (~587mm on center). They are hung *flush* between the front and back bearers using joist hangers, acting as a flat perimeter for the plywood.
+* **Joists:** Seven 150x50mm timbers (1.7m long) spaced evenly (~587mm on center). They are hung *flush* between the front and back bearers using joist hangers, acting as a flat perimeter for the plywood.
 
 ## Roof & Nesting
 * **Roof:** Sloped single-plane (skillion) roof to easily shed rain downhill.

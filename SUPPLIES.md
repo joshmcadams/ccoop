@@ -9,8 +9,8 @@
 
 ## Framing (150x50mm H3.2 Timber)
 * **Bearers (2.52m):** 2x 3.0m lengths @ ~$20/ea = $40
-* **Joists (1.70m):** 5x 1.8m lengths @ ~$12/ea = $60
-* **Joist Hangers (50mm):** 10x @ ~$2/ea = $20
+* **Joists (1.70m):** 7x 1.8m lengths @ ~$12/ea = $60
+* **Joist Hangers (50mm):** 14x @ ~$2/ea = $20
 * **Lag Screws / Coach Screws (for bearers):** 12x @ ~$1.50/ea = $18
 
 ## Floor Decking
