@@ -9,12 +9,12 @@
 
 ## Framing (150x50mm H3.2 Timber)
 * **Bearers (3.0m uncut):** 2x 3.0m lengths @ ~$20/ea = $40
-* **Joists (1.70m):** 7x 1.8m lengths @ ~$12/ea = $84
-* **Joist Hangers (50mm):** 14x @ ~$2/ea = $28
+* **Joists (1.70m):** 8x 1.8m lengths @ ~$12/ea = $96
+* **Lumberlok Joist Hangers (47x90mm, to fit 50mm timber):** 16x @ ~$2/ea = $32
 * **Lag Screws / Coach Screws (for bearers):** 12x @ ~$1.50/ea = $18
 
 ## Floor Decking
 * **H3.2 Treated Plywood (2400x1200x17mm):** 2 sheets @ ~$95/ea = $190
 
-**Running Total (Foundation & Floor): ~$603 NZD**
+**Running Total (Foundation & Floor): ~$633 NZD**
 *(Wall framing, cladding, roof iron, and hardware to be calculated next)*
