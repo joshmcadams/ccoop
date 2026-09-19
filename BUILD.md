@@ -8,16 +8,17 @@
 
 ## Phase 2: Bearers
 1. Measure and mark a level line across all posts (accounting for the 10-degree slope of the ground). The top of the bearers should be 600mm above ground on the uphill side.
-2. Cut two 150x50mm timbers to 2.52m.
-3. Bolt them horizontally to the *inside* faces of the front and rear posts using heavy galvanized lag screws.
+2. Take two uncut 3.0m lengths of 150x50mm timber (do not cut them).
+3. Bolt them horizontally to the *inside* faces of the front and rear posts using heavy galvanized lag screws. Center them so they overhang the posts by 240mm on each side. These overhangs will act as cantilever supports for your nesting boxes.
 
 ## Phase 3: Floor Joists
-1. Cut five 150x50mm joists to 1.7m length.
-2. Attach them between the front and back bearers using galvanized joist hangers so their top edges are perfectly flush.
-3. The two outermost joists should sit tightly against the inner faces of the corner posts, creating a perfect 2400x1800mm perimeter.
+1. Cut seven 150x50mm joists to 1.7m length.
+2. Attach five of them between the posts to frame the main 2400x1800 floor area. Attach the remaining two at the very ends of the 3.0m bearers to cap off the cantilevers.
+3. Fasten all joists using galvanized joist hangers so their top edges are perfectly flush with the bearers.
 
 ## Phase 4: Plywood Floor
-1. Lay one full 2400x1200mm sheet of H3.2 treated plywood across the back half of the framing.
+1. Lay one full 2400x1200mm sheet of H3.2 treated plywood across the back half of the main framing.
 2. Rip a second sheet in half to get a 2400x600mm piece.
 3. Lay the 2400x600mm piece across the front half.
 4. Nail/screw the plywood down into the joists and bearers.
+5. (Note: The cantilevered shelf areas will be covered by the nesting box floors later).
