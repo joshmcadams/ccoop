@@ -4,6 +4,13 @@
 * **Footprint:** 2400mm x 1800mm (8x6 ft).
 * **Rationale:** This is optimized for standard NZ plywood sheets (2400x1200mm). The floor will use exactly 1.5 sheets (one full sheet + one ripped in half lengthways) with zero offcuts.
 
+## Space Planning & Flock Capacity
+* **Flock Size:** Designed for 12-20 chickens.
+* **Coop Floor Area:** 4.32 square meters (46.5 sq ft).
+* **Free Range Operation (Primary Use):** Because the flock is primarily free-ranging on a lifestyle block, they only need the coop for sleeping (roosting), laying eggs, and avoiding severe weather. The 4.32 sqm space is extremely generous and comfortable for 20 free-range birds.
+* **Nesting Boxes:** You need roughly 1 nesting box per 4-5 hens. We are planning for a bank of 3 to 5 nesting boxes along the side wall to support the flock size. 
+* **Confined Operation (Non-Free Range):** If the birds could not free-range (e.g. for biosecurity or predator lockdown), a coop this size would humanely house a maximum of 10-11 fully confined chickens (allowing ~0.4 sqm per bird). For a fully enclosed flock of 12-20 birds, you would absolutely need to attach an enclosed run of at least 12 to 20 square meters (1 sqm per bird minimum) that the shelter opens directly into.
+
 ## Foundation & Posts
 * **Style:** Pole-barn style on sloped ground.
 * **Posts:** 6x H4 Treated Round Fence Posts (115mm/120mm diameter).
