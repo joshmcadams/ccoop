@@ -19,6 +19,7 @@
 
 ## Floor Framing
 * **Bearers (Uncut Cantilever):** Two 150x50mm timbers, bolted to the *inside* faces of the posts. We use **uncut 3.0m standard lengths**. Because the posts are 2.52m apart, this naturally leaves a 240mm (9.5-inch) overhang on both sides. This is an intentional design choice to eliminate waste from cutting, and provides an incredibly sturdy built-in cantilevered shelf to support the external nesting boxes on one side, and a porch/feeder platform on the other.
+* **Hardware Orientation (Safety):** The bearers are attached using M12 carriage bolts. The bolts are explicitly driven from the *outside in* — meaning the smooth, domed head sits on the exposed exterior of the posts, and the sharp threaded tip and nut are safely hidden underneath the coop floorboards. This prevents injury to people and flock.
 * **Joists:** Seven 150x50mm timbers (1.7m long) spaced evenly (~587mm on center), including two joists capping the ends of the 3.0m cantilevers. They are hung *flush* between the front and back bearers using joist hangers, acting as a flat perimeter for the plywood.
 
 ## Roof & Nesting

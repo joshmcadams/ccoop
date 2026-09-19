@@ -9,7 +9,8 @@
 ## Phase 2: Bearers
 1. Measure and mark a level line across all posts (accounting for the 10-degree slope of the ground). The top of the bearers should be 600mm above ground on the uphill side.
 2. Take two uncut 3.0m lengths of 150x50mm timber (do not cut them).
-3. Bolt them horizontally to the *inside* faces of the front and rear posts using heavy galvanized lag screws. Center them so they overhang the posts by 240mm on each side. These overhangs will act as cantilever supports for your nesting boxes.
+3. Bolt them horizontally to the *inside* faces of the front and rear posts using two M12 carriage bolts per post. Center the timbers so they overhang the posts by 240mm on each side. These overhangs will act as cantilever supports for your nesting boxes.
+4. **CRITICAL HARDWARE STEP:** Insert the carriage bolts from the *outside in*. The smooth dome head should rest on the outside of the green post, and the nut and washer should be fastened on the inside of the bearer (under the coop floor). This ensures no sharp threads protrude onto the exterior walking space.
 
 ## Phase 3: Floor Joists
 1. Cut seven 150x50mm joists to 1.7m length.
