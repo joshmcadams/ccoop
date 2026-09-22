@@ -1,0 +1,2927 @@
+{
+  "config": {
+    "schema_version": 1,
+    "status": "geometry coordination draft; connections and site design pending",
+    "site": {
+      "slope_degrees": 10.0,
+      "ground_at_origin_m": -0.6,
+      "embedment_m": 0.6,
+      "confirmed": false,
+      "location": "Coatesville, Auckland, New Zealand",
+      "reported_wind_exposure": "Some wind, typically not too severe (user description)",
+      "wind_zone": null
+    },
+    "floor": {
+      "width_m": 2.4,
+      "depth_m": 1.8,
+      "bearer_length_m": 3.0,
+      "framing_top_m": 0.15,
+      "timber_width_m": 0.05,
+      "timber_depth_m": 0.15,
+      "ply_thickness_m": 0.017,
+      "sheet_gap_m": 0.003,
+      "saw_kerf_m": 0.003
+    },
+    "posts": {
+      "diameter_m": 0.12,
+      "stock_length_m": 3.0,
+      "treatment_intent": "H5 structural poles; grade and diameter to be confirmed"
+    },
+    "roof": {
+      "front_bearer_top_m": 1.89,
+      "rear_bearer_top_m": 1.57,
+      "rafter_depth_m": 0.1,
+      "rafter_width_m": 0.05,
+      "rafter_length_m": 2.4,
+      "seat_depth_at_centre_m": 0.01,
+      "purlin_width_m": 0.09,
+      "purlin_depth_m": 0.045,
+      "covering_intent": "Four corrugated steel sheets; factory condensation fleece candidate; supplier/exposure/fixings pending",
+      "sheet_count": 4,
+      "sheet_length_m": 2.4,
+      "sheet_width_m": 0.845,
+      "sheet_cover_m": 0.762,
+      "corrugation_pitch_m": 0.0762,
+      "corrugation_height_m": 0.018,
+      "sheet_bmt_m": 0.00055,
+      "fleece_thickness_m": 0.0012,
+      "separator_thickness_m": 0.001
+    },
+    "hardware": {
+      "bolt_diameter_m": 0.012,
+      "bolt_length_m": 0.2,
+      "connection_design_confirmed": false
+    },
+    "flock": {
+      "target": 12,
+      "layout_confirmed": false
+    },
+    "access": {
+      "service_mode": "primarily external hatches; crouched entry acceptable",
+      "standing_headroom_required": false,
+      "rear_cleanout": "two separate top-hinged flaps around retained centre pole; detail pending",
+      "floor_height_decision": "confirmed: floor and roof lowered together by 450 mm; internal headroom unchanged"
+    }
+  },
+  "derived": {
+    "roof_pitch_degrees": 10.36245909843186,
+    "joist_centres_m": [
+      -1.475,
+      -1.175,
+      -0.7050000000000001,
+      -0.235,
+      0.2350000000000001,
+      0.7050000000000001,
+      1.175,
+      1.475
+    ],
+    "post_grid_m": [
+      2.1799999999999997,
+      1.58
+    ],
+    "posts": [
+      {
+        "name": "Post_Front_0",
+        "length_m": 2.9507016852403125,
+        "ground_m": -0.46070168524031263,
+        "bottom_m": -1.0607016852403126,
+        "top_m": 1.89
+      },
+      {
+        "name": "Post_Front_1",
+        "length_m": 2.9507016852403125,
+        "ground_m": -0.46070168524031263,
+        "bottom_m": -1.0607016852403126,
+        "top_m": 1.89
+      },
+      {
+        "name": "Post_Front_2",
+        "length_m": 2.9507016852403125,
+        "ground_m": -0.46070168524031263,
+        "bottom_m": -1.0607016852403126,
+        "top_m": 1.89
+      },
+      {
+        "name": "Post_Back_0",
+        "length_m": 2.9092983147596874,
+        "ground_m": -0.7392983147596873,
+        "bottom_m": -1.3392983147596873,
+        "top_m": 1.57
+      },
+      {
+        "name": "Post_Back_1",
+        "length_m": 2.9092983147596874,
+        "ground_m": -0.7392983147596873,
+        "bottom_m": -1.3392983147596873,
+        "top_m": 1.57
+      },
+      {
+        "name": "Post_Back_2",
+        "length_m": 2.9092983147596874,
+        "ground_m": -0.7392983147596873,
+        "bottom_m": -1.3392983147596873,
+        "top_m": 1.57
+      }
+    ],
+    "roof_covering": {
+      "sheet_count": 4,
+      "overall_width_m": 3.1310000000000002,
+      "length_on_slope_m": 2.4,
+      "side_lap_m": 0.08299999999999996,
+      "gross_sheet_area_m2": 8.112,
+      "covered_slope_area_m2": 7.5144,
+      "status": "coordination only; supplier profile, fleece suitability, fixings and flashings pending"
+    }
+  },
+  "validation": {
+    "roof_sheets_checked": 4,
+    "roof_static_pairs_checked": 202,
+    "roof_intersections": 0,
+    "solid_pairs_checked": 946,
+    "solid_intersections": 0,
+    "notched_panels_checked": 2,
+    "rafter_bearing_seats_checked": 12,
+    "post_stock_and_embedment_checked": 6,
+    "two_sheet_kerf_check": "passed",
+    "structural_capacity": "not evaluated",
+    "roof_path_pairs_checked": 3692,
+    "roof_path_intersections": 0,
+    "plywood_path_pairs_checked": 1301,
+    "plywood_path_intersections": 0,
+    "assembled_holds": "passed"
+  },
+  "parts": [
+    {
+      "name": "Ground",
+      "kind": "terrain",
+      "phase": "00 Site",
+      "bounds_m": [
+        [
+          -4.0,
+          -3.94270396232605,
+          -1.3345973491668701
+        ],
+        [
+          4.0,
+          3.94270396232605,
+          0.0939803496003151
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Post_Front_0",
+      "kind": "post",
+      "phase": "01 Posts",
+      "bounds_m": [
+        [
+          -1.149999976158142,
+          -0.8500000238418579,
+          -1.0607017278671265
+        ],
+        [
+          -1.03000009059906,
+          -0.7300000190734863,
+          1.8899999856948853
+        ]
+      ],
+      "cut_length_m": 2.9507016852403125
+    },
+    {
+      "name": "Post_Front_1",
+      "kind": "post",
+      "phase": "01 Posts",
+      "bounds_m": [
+        [
+          -0.05999999865889549,
+          -0.8500000238418579,
+          -1.0607017278671265
+        ],
+        [
+          0.05999999865889549,
+          -0.7300000190734863,
+          1.8899999856948853
+        ]
+      ],
+      "cut_length_m": 2.9507016852403125
+    },
+    {
+      "name": "Post_Front_2",
+      "kind": "post",
+      "phase": "01 Posts",
+      "bounds_m": [
+        [
+          1.03000009059906,
+          -0.8500000238418579,
+          -1.0607017278671265
+        ],
+        [
+          1.149999976158142,
+          -0.7300000190734863,
+          1.8899999856948853
+        ]
+      ],
+      "cut_length_m": 2.9507016852403125
+    },
+    {
+      "name": "Bearer_Front",
+      "kind": "timber",
+      "phase": "02 Floor bearers",
+      "bounds_m": [
+        [
+          -1.5,
+          -0.8999999761581421,
+          0.0
+        ],
+        [
+          1.5,
+          -0.8500000238418579,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Roof_Bearer_Front",
+      "kind": "timber",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -1.2000000476837158,
+          -0.8999999761581421,
+          1.7400000095367432
+        ],
+        [
+          1.2000000476837158,
+          -0.8500000238418579,
+          1.8900001049041748
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_0_0_Shaft",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -1.096000075340271,
+          -0.9000000357627869,
+          0.0989999920129776
+        ],
+        [
+          -1.0839999914169312,
+          -0.699999988079071,
+          0.11100000143051147
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_0_0_DomedHead",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -1.1040000915527344,
+          -0.9079999923706055,
+          0.09099999815225601
+        ],
+        [
+          -1.0759999752044678,
+          -0.8999999761581421,
+          0.11899999529123306
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_0_0_Washer",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -1.1050000190734863,
+          -0.7299999594688416,
+          0.08999999612569809
+        ],
+        [
+          -1.0750000476837158,
+          -0.7260000109672546,
+          0.11999999731779099
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_0_0_Nut",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -1.0990933179855347,
+          -0.7260000109672546,
+          0.09449999779462814
+        ],
+        [
+          -1.0809067487716675,
+          -0.7160000205039978,
+          0.11549999564886093
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_0_0_Shaft",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -1.096000075340271,
+          -0.9000000357627869,
+          1.8389999866485596
+        ],
+        [
+          -1.0839999914169312,
+          -0.699999988079071,
+          1.8510000705718994
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_0_0_DomedHead",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -1.1040000915527344,
+          -0.9079999923706055,
+          1.8309999704360962
+        ],
+        [
+          -1.0759999752044678,
+          -0.8999999761581421,
+          1.8590000867843628
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_0_0_Washer",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -1.1050000190734863,
+          -0.7299999594688416,
+          1.8300000429153442
+        ],
+        [
+          -1.0750000476837158,
+          -0.7260000109672546,
+          1.8600000143051147
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_0_0_Nut",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -1.0990933179855347,
+          -0.7260000109672546,
+          1.8345000743865967
+        ],
+        [
+          -1.0809067487716675,
+          -0.7160000205039978,
+          1.8554999828338623
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_0_1_Shaft",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -1.096000075340271,
+          -0.9000000357627869,
+          0.038999997079372406
+        ],
+        [
+          -1.0839999914169312,
+          -0.699999988079071,
+          0.05100000649690628
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_0_1_DomedHead",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -1.1040000915527344,
+          -0.9079999923706055,
+          0.03100000135600567
+        ],
+        [
+          -1.0759999752044678,
+          -0.8999999761581421,
+          0.05900000035762787
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_0_1_Washer",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -1.1050000190734863,
+          -0.7299999594688416,
+          0.030000001192092896
+        ],
+        [
+          -1.0750000476837158,
+          -0.7260000109672546,
+          0.06000000238418579
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_0_1_Nut",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -1.0990933179855347,
+          -0.7260000109672546,
+          0.03450000286102295
+        ],
+        [
+          -1.0809067487716675,
+          -0.7160000205039978,
+          0.05550000071525574
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_0_1_Shaft",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -1.096000075340271,
+          -0.9000000357627869,
+          1.778999924659729
+        ],
+        [
+          -1.0839999914169312,
+          -0.699999988079071,
+          1.7910000085830688
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_0_1_DomedHead",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -1.1040000915527344,
+          -0.9079999923706055,
+          1.7709999084472656
+        ],
+        [
+          -1.0759999752044678,
+          -0.8999999761581421,
+          1.7990000247955322
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_0_1_Washer",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -1.1050000190734863,
+          -0.7299999594688416,
+          1.7699999809265137
+        ],
+        [
+          -1.0750000476837158,
+          -0.7260000109672546,
+          1.7999999523162842
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_0_1_Nut",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -1.0990933179855347,
+          -0.7260000109672546,
+          1.7745000123977661
+        ],
+        [
+          -1.0809067487716675,
+          -0.7160000205039978,
+          1.7954999208450317
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_1_0_Shaft",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -0.006000000052154064,
+          -0.9000000357627869,
+          0.0989999920129776
+        ],
+        [
+          0.006000000052154064,
+          -0.699999988079071,
+          0.11100000143051147
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_1_0_DomedHead",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -0.0139999995008111,
+          -0.9079999923706055,
+          0.09099999815225601
+        ],
+        [
+          0.014000000432133675,
+          -0.8999999761581421,
+          0.11899999529123306
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_1_0_Washer",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -0.014999999664723873,
+          -0.7299999594688416,
+          0.08999999612569809
+        ],
+        [
+          0.014999999664723873,
+          -0.7260000109672546,
+          0.11999999731779099
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_1_0_Nut",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -0.009093266911804676,
+          -0.7260000109672546,
+          0.09449999779462814
+        ],
+        [
+          0.009093266911804676,
+          -0.7160000205039978,
+          0.11549999564886093
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_1_0_Shaft",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -0.006000000052154064,
+          -0.9000000357627869,
+          1.8389999866485596
+        ],
+        [
+          0.006000000052154064,
+          -0.699999988079071,
+          1.8510000705718994
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_1_0_DomedHead",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -0.0139999995008111,
+          -0.9079999923706055,
+          1.8309999704360962
+        ],
+        [
+          0.014000000432133675,
+          -0.8999999761581421,
+          1.8590000867843628
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_1_0_Washer",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -0.014999999664723873,
+          -0.7299999594688416,
+          1.8300000429153442
+        ],
+        [
+          0.014999999664723873,
+          -0.7260000109672546,
+          1.8600000143051147
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_1_0_Nut",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -0.009093266911804676,
+          -0.7260000109672546,
+          1.8345000743865967
+        ],
+        [
+          0.009093266911804676,
+          -0.7160000205039978,
+          1.8554999828338623
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_1_1_Shaft",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -0.006000000052154064,
+          -0.9000000357627869,
+          0.038999997079372406
+        ],
+        [
+          0.006000000052154064,
+          -0.699999988079071,
+          0.05100000649690628
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_1_1_DomedHead",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -0.0139999995008111,
+          -0.9079999923706055,
+          0.03100000135600567
+        ],
+        [
+          0.014000000432133675,
+          -0.8999999761581421,
+          0.05900000035762787
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_1_1_Washer",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -0.014999999664723873,
+          -0.7299999594688416,
+          0.030000001192092896
+        ],
+        [
+          0.014999999664723873,
+          -0.7260000109672546,
+          0.06000000238418579
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_1_1_Nut",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -0.009093266911804676,
+          -0.7260000109672546,
+          0.03450000286102295
+        ],
+        [
+          0.009093266911804676,
+          -0.7160000205039978,
+          0.05550000071525574
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_1_1_Shaft",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -0.006000000052154064,
+          -0.9000000357627869,
+          1.778999924659729
+        ],
+        [
+          0.006000000052154064,
+          -0.699999988079071,
+          1.7910000085830688
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_1_1_DomedHead",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -0.0139999995008111,
+          -0.9079999923706055,
+          1.7709999084472656
+        ],
+        [
+          0.014000000432133675,
+          -0.8999999761581421,
+          1.7990000247955322
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_1_1_Washer",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -0.014999999664723873,
+          -0.7299999594688416,
+          1.7699999809265137
+        ],
+        [
+          0.014999999664723873,
+          -0.7260000109672546,
+          1.7999999523162842
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_1_1_Nut",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -0.009093266911804676,
+          -0.7260000109672546,
+          1.7745000123977661
+        ],
+        [
+          0.009093266911804676,
+          -0.7160000205039978,
+          1.7954999208450317
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_2_0_Shaft",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          1.0839999914169312,
+          -0.9000000357627869,
+          0.0989999920129776
+        ],
+        [
+          1.096000075340271,
+          -0.699999988079071,
+          0.11100000143051147
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_2_0_DomedHead",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          1.0759999752044678,
+          -0.9079999923706055,
+          0.09099999815225601
+        ],
+        [
+          1.1040000915527344,
+          -0.8999999761581421,
+          0.11899999529123306
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_2_0_Washer",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          1.0750000476837158,
+          -0.7299999594688416,
+          0.08999999612569809
+        ],
+        [
+          1.1050000190734863,
+          -0.7260000109672546,
+          0.11999999731779099
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_2_0_Nut",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          1.0809067487716675,
+          -0.7260000109672546,
+          0.09449999779462814
+        ],
+        [
+          1.0990933179855347,
+          -0.7160000205039978,
+          0.11549999564886093
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_2_0_Shaft",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          1.0839999914169312,
+          -0.9000000357627869,
+          1.8389999866485596
+        ],
+        [
+          1.096000075340271,
+          -0.699999988079071,
+          1.8510000705718994
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_2_0_DomedHead",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          1.0759999752044678,
+          -0.9079999923706055,
+          1.8309999704360962
+        ],
+        [
+          1.1040000915527344,
+          -0.8999999761581421,
+          1.8590000867843628
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_2_0_Washer",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          1.0750000476837158,
+          -0.7299999594688416,
+          1.8300000429153442
+        ],
+        [
+          1.1050000190734863,
+          -0.7260000109672546,
+          1.8600000143051147
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_2_0_Nut",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          1.0809067487716675,
+          -0.7260000109672546,
+          1.8345000743865967
+        ],
+        [
+          1.0990933179855347,
+          -0.7160000205039978,
+          1.8554999828338623
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_2_1_Shaft",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          1.0839999914169312,
+          -0.9000000357627869,
+          0.038999997079372406
+        ],
+        [
+          1.096000075340271,
+          -0.699999988079071,
+          0.05100000649690628
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_2_1_DomedHead",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          1.0759999752044678,
+          -0.9079999923706055,
+          0.03100000135600567
+        ],
+        [
+          1.1040000915527344,
+          -0.8999999761581421,
+          0.05900000035762787
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_2_1_Washer",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          1.0750000476837158,
+          -0.7299999594688416,
+          0.030000001192092896
+        ],
+        [
+          1.1050000190734863,
+          -0.7260000109672546,
+          0.06000000238418579
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Front_2_1_Nut",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          1.0809067487716675,
+          -0.7260000109672546,
+          0.03450000286102295
+        ],
+        [
+          1.0990933179855347,
+          -0.7160000205039978,
+          0.05550000071525574
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_2_1_Shaft",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          1.0839999914169312,
+          -0.9000000357627869,
+          1.778999924659729
+        ],
+        [
+          1.096000075340271,
+          -0.699999988079071,
+          1.7910000085830688
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_2_1_DomedHead",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          1.0759999752044678,
+          -0.9079999923706055,
+          1.7709999084472656
+        ],
+        [
+          1.1040000915527344,
+          -0.8999999761581421,
+          1.7990000247955322
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_2_1_Washer",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          1.0750000476837158,
+          -0.7299999594688416,
+          1.7699999809265137
+        ],
+        [
+          1.1050000190734863,
+          -0.7260000109672546,
+          1.7999999523162842
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Front_2_1_Nut",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          1.0809067487716675,
+          -0.7260000109672546,
+          1.7745000123977661
+        ],
+        [
+          1.0990933179855347,
+          -0.7160000205039978,
+          1.7954999208450317
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Post_Back_0",
+      "kind": "post",
+      "phase": "01 Posts",
+      "bounds_m": [
+        [
+          -1.149999976158142,
+          0.7300000190734863,
+          -1.3392983675003052
+        ],
+        [
+          -1.03000009059906,
+          0.8500000238418579,
+          1.5700000524520874
+        ]
+      ],
+      "cut_length_m": 2.9092983147596874
+    },
+    {
+      "name": "Post_Back_1",
+      "kind": "post",
+      "phase": "01 Posts",
+      "bounds_m": [
+        [
+          -0.05999999865889549,
+          0.7300000190734863,
+          -1.3392983675003052
+        ],
+        [
+          0.05999999865889549,
+          0.8500000238418579,
+          1.5700000524520874
+        ]
+      ],
+      "cut_length_m": 2.9092983147596874
+    },
+    {
+      "name": "Post_Back_2",
+      "kind": "post",
+      "phase": "01 Posts",
+      "bounds_m": [
+        [
+          1.03000009059906,
+          0.7300000190734863,
+          -1.3392983675003052
+        ],
+        [
+          1.149999976158142,
+          0.8500000238418579,
+          1.5700000524520874
+        ]
+      ],
+      "cut_length_m": 2.9092983147596874
+    },
+    {
+      "name": "Bearer_Back",
+      "kind": "timber",
+      "phase": "02 Floor bearers",
+      "bounds_m": [
+        [
+          -1.5,
+          0.8500000238418579,
+          0.0
+        ],
+        [
+          1.5,
+          0.8999999761581421,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Roof_Bearer_Back",
+      "kind": "timber",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -1.2000000476837158,
+          0.8500000238418579,
+          1.4199999570846558
+        ],
+        [
+          1.2000000476837158,
+          0.8999999761581421,
+          1.5700000524520874
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_0_0_Shaft",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -1.096000075340271,
+          0.699999988079071,
+          0.0989999920129776
+        ],
+        [
+          -1.0839999914169312,
+          0.9000000357627869,
+          0.11100000143051147
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_0_0_DomedHead",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -1.1040000915527344,
+          0.8999999761581421,
+          0.09099999815225601
+        ],
+        [
+          -1.0759999752044678,
+          0.9079999923706055,
+          0.11899999529123306
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_0_0_Washer",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -1.1050000190734863,
+          0.7260000109672546,
+          0.08999999612569809
+        ],
+        [
+          -1.0750000476837158,
+          0.7299999594688416,
+          0.11999999731779099
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_0_0_Nut",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -1.0990933179855347,
+          0.7160000205039978,
+          0.09449999779462814
+        ],
+        [
+          -1.0809067487716675,
+          0.7260000109672546,
+          0.11549999564886093
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_0_0_Shaft",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -1.096000075340271,
+          0.699999988079071,
+          1.5189999341964722
+        ],
+        [
+          -1.0839999914169312,
+          0.9000000357627869,
+          1.531000018119812
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_0_0_DomedHead",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -1.1040000915527344,
+          0.8999999761581421,
+          1.5109999179840088
+        ],
+        [
+          -1.0759999752044678,
+          0.9079999923706055,
+          1.5390000343322754
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_0_0_Washer",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -1.1050000190734863,
+          0.7260000109672546,
+          1.5099999904632568
+        ],
+        [
+          -1.0750000476837158,
+          0.7299999594688416,
+          1.5399999618530273
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_0_0_Nut",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -1.0990933179855347,
+          0.7160000205039978,
+          1.5145000219345093
+        ],
+        [
+          -1.0809067487716675,
+          0.7260000109672546,
+          1.535499930381775
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_0_1_Shaft",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -1.096000075340271,
+          0.699999988079071,
+          0.038999997079372406
+        ],
+        [
+          -1.0839999914169312,
+          0.9000000357627869,
+          0.05100000649690628
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_0_1_DomedHead",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -1.1040000915527344,
+          0.8999999761581421,
+          0.03100000135600567
+        ],
+        [
+          -1.0759999752044678,
+          0.9079999923706055,
+          0.05900000035762787
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_0_1_Washer",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -1.1050000190734863,
+          0.7260000109672546,
+          0.030000001192092896
+        ],
+        [
+          -1.0750000476837158,
+          0.7299999594688416,
+          0.06000000238418579
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_0_1_Nut",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -1.0990933179855347,
+          0.7160000205039978,
+          0.03450000286102295
+        ],
+        [
+          -1.0809067487716675,
+          0.7260000109672546,
+          0.05550000071525574
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_0_1_Shaft",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -1.096000075340271,
+          0.699999988079071,
+          1.4589999914169312
+        ],
+        [
+          -1.0839999914169312,
+          0.9000000357627869,
+          1.471000075340271
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_0_1_DomedHead",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -1.1040000915527344,
+          0.8999999761581421,
+          1.4509999752044678
+        ],
+        [
+          -1.0759999752044678,
+          0.9079999923706055,
+          1.4790000915527344
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_0_1_Washer",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -1.1050000190734863,
+          0.7260000109672546,
+          1.4500000476837158
+        ],
+        [
+          -1.0750000476837158,
+          0.7299999594688416,
+          1.4800000190734863
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_0_1_Nut",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -1.0990933179855347,
+          0.7160000205039978,
+          1.4545000791549683
+        ],
+        [
+          -1.0809067487716675,
+          0.7260000109672546,
+          1.4754999876022339
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_1_0_Shaft",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -0.006000000052154064,
+          0.699999988079071,
+          0.0989999920129776
+        ],
+        [
+          0.006000000052154064,
+          0.9000000357627869,
+          0.11100000143051147
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_1_0_DomedHead",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -0.0139999995008111,
+          0.8999999761581421,
+          0.09099999815225601
+        ],
+        [
+          0.014000000432133675,
+          0.9079999923706055,
+          0.11899999529123306
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_1_0_Washer",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -0.014999999664723873,
+          0.7260000109672546,
+          0.08999999612569809
+        ],
+        [
+          0.014999999664723873,
+          0.7299999594688416,
+          0.11999999731779099
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_1_0_Nut",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -0.009093266911804676,
+          0.7160000205039978,
+          0.09449999779462814
+        ],
+        [
+          0.009093266911804676,
+          0.7260000109672546,
+          0.11549999564886093
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_1_0_Shaft",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -0.006000000052154064,
+          0.699999988079071,
+          1.5189999341964722
+        ],
+        [
+          0.006000000052154064,
+          0.9000000357627869,
+          1.531000018119812
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_1_0_DomedHead",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -0.0139999995008111,
+          0.8999999761581421,
+          1.5109999179840088
+        ],
+        [
+          0.014000000432133675,
+          0.9079999923706055,
+          1.5390000343322754
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_1_0_Washer",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -0.014999999664723873,
+          0.7260000109672546,
+          1.5099999904632568
+        ],
+        [
+          0.014999999664723873,
+          0.7299999594688416,
+          1.5399999618530273
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_1_0_Nut",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -0.009093266911804676,
+          0.7160000205039978,
+          1.5145000219345093
+        ],
+        [
+          0.009093266911804676,
+          0.7260000109672546,
+          1.535499930381775
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_1_1_Shaft",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -0.006000000052154064,
+          0.699999988079071,
+          0.038999997079372406
+        ],
+        [
+          0.006000000052154064,
+          0.9000000357627869,
+          0.05100000649690628
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_1_1_DomedHead",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -0.0139999995008111,
+          0.8999999761581421,
+          0.03100000135600567
+        ],
+        [
+          0.014000000432133675,
+          0.9079999923706055,
+          0.05900000035762787
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_1_1_Washer",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -0.014999999664723873,
+          0.7260000109672546,
+          0.030000001192092896
+        ],
+        [
+          0.014999999664723873,
+          0.7299999594688416,
+          0.06000000238418579
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_1_1_Nut",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          -0.009093266911804676,
+          0.7160000205039978,
+          0.03450000286102295
+        ],
+        [
+          0.009093266911804676,
+          0.7260000109672546,
+          0.05550000071525574
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_1_1_Shaft",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -0.006000000052154064,
+          0.699999988079071,
+          1.4589999914169312
+        ],
+        [
+          0.006000000052154064,
+          0.9000000357627869,
+          1.471000075340271
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_1_1_DomedHead",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -0.0139999995008111,
+          0.8999999761581421,
+          1.4509999752044678
+        ],
+        [
+          0.014000000432133675,
+          0.9079999923706055,
+          1.4790000915527344
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_1_1_Washer",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -0.014999999664723873,
+          0.7260000109672546,
+          1.4500000476837158
+        ],
+        [
+          0.014999999664723873,
+          0.7299999594688416,
+          1.4800000190734863
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_1_1_Nut",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          -0.009093266911804676,
+          0.7160000205039978,
+          1.4545000791549683
+        ],
+        [
+          0.009093266911804676,
+          0.7260000109672546,
+          1.4754999876022339
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_2_0_Shaft",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          1.0839999914169312,
+          0.699999988079071,
+          0.0989999920129776
+        ],
+        [
+          1.096000075340271,
+          0.9000000357627869,
+          0.11100000143051147
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_2_0_DomedHead",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          1.0759999752044678,
+          0.8999999761581421,
+          0.09099999815225601
+        ],
+        [
+          1.1040000915527344,
+          0.9079999923706055,
+          0.11899999529123306
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_2_0_Washer",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          1.0750000476837158,
+          0.7260000109672546,
+          0.08999999612569809
+        ],
+        [
+          1.1050000190734863,
+          0.7299999594688416,
+          0.11999999731779099
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_2_0_Nut",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          1.0809067487716675,
+          0.7160000205039978,
+          0.09449999779462814
+        ],
+        [
+          1.0990933179855347,
+          0.7260000109672546,
+          0.11549999564886093
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_2_0_Shaft",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          1.0839999914169312,
+          0.699999988079071,
+          1.5189999341964722
+        ],
+        [
+          1.096000075340271,
+          0.9000000357627869,
+          1.531000018119812
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_2_0_DomedHead",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          1.0759999752044678,
+          0.8999999761581421,
+          1.5109999179840088
+        ],
+        [
+          1.1040000915527344,
+          0.9079999923706055,
+          1.5390000343322754
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_2_0_Washer",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          1.0750000476837158,
+          0.7260000109672546,
+          1.5099999904632568
+        ],
+        [
+          1.1050000190734863,
+          0.7299999594688416,
+          1.5399999618530273
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_2_0_Nut",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          1.0809067487716675,
+          0.7160000205039978,
+          1.5145000219345093
+        ],
+        [
+          1.0990933179855347,
+          0.7260000109672546,
+          1.535499930381775
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_2_1_Shaft",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          1.0839999914169312,
+          0.699999988079071,
+          0.038999997079372406
+        ],
+        [
+          1.096000075340271,
+          0.9000000357627869,
+          0.05100000649690628
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_2_1_DomedHead",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          1.0759999752044678,
+          0.8999999761581421,
+          0.03100000135600567
+        ],
+        [
+          1.1040000915527344,
+          0.9079999923706055,
+          0.05900000035762787
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_2_1_Washer",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          1.0750000476837158,
+          0.7260000109672546,
+          0.030000001192092896
+        ],
+        [
+          1.1050000190734863,
+          0.7299999594688416,
+          0.06000000238418579
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "FloorBolt_Back_2_1_Nut",
+      "kind": "hardware",
+      "phase": "03 Floor bolts",
+      "bounds_m": [
+        [
+          1.0809067487716675,
+          0.7160000205039978,
+          0.03450000286102295
+        ],
+        [
+          1.0990933179855347,
+          0.7260000109672546,
+          0.05550000071525574
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_2_1_Shaft",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          1.0839999914169312,
+          0.699999988079071,
+          1.4589999914169312
+        ],
+        [
+          1.096000075340271,
+          0.9000000357627869,
+          1.471000075340271
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_2_1_DomedHead",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          1.0759999752044678,
+          0.8999999761581421,
+          1.4509999752044678
+        ],
+        [
+          1.1040000915527344,
+          0.9079999923706055,
+          1.4790000915527344
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_2_1_Washer",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          1.0750000476837158,
+          0.7260000109672546,
+          1.4500000476837158
+        ],
+        [
+          1.1050000190734863,
+          0.7299999594688416,
+          1.4800000190734863
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "RoofBolt_Back_2_1_Nut",
+      "kind": "hardware",
+      "phase": "06 Roof bearers",
+      "bounds_m": [
+        [
+          1.0809067487716675,
+          0.7160000205039978,
+          1.4545000791549683
+        ],
+        [
+          1.0990933179855347,
+          0.7260000109672546,
+          1.4754999876022339
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Joist_0",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          -1.5,
+          -0.8500000238418579,
+          0.0
+        ],
+        [
+          -1.4500000476837158,
+          0.8500000238418579,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Joist_1",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          -1.1999999284744263,
+          -0.8500000238418579,
+          0.0
+        ],
+        [
+          -1.149999976158142,
+          0.8500000238418579,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Joist_2",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          -0.7299999594688416,
+          -0.8500000238418579,
+          0.0
+        ],
+        [
+          -0.6800000071525574,
+          0.8500000238418579,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Joist_3",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          -0.25999999046325684,
+          -0.8500000238418579,
+          0.0
+        ],
+        [
+          -0.20999999344348907,
+          0.8500000238418579,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Joist_4",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          0.20999999344348907,
+          -0.8500000238418579,
+          0.0
+        ],
+        [
+          0.25999999046325684,
+          0.8500000238418579,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Joist_5",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          0.6800000071525574,
+          -0.8500000238418579,
+          0.0
+        ],
+        [
+          0.7299999594688416,
+          0.8500000238418579,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Joist_6",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          1.149999976158142,
+          -0.8500000238418579,
+          0.0
+        ],
+        [
+          1.1999999284744263,
+          0.8500000238418579,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Joist_7",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          1.4500000476837158,
+          -0.8500000238418579,
+          0.0
+        ],
+        [
+          1.5,
+          0.8500000238418579,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Shelf_Sister_-1",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          -1.25,
+          -0.8500000238418579,
+          0.0
+        ],
+        [
+          -1.2000000476837158,
+          0.8500000238418579,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Shelf_Sister_1",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          1.2000000476837158,
+          -0.8500000238418579,
+          0.0
+        ],
+        [
+          1.25,
+          0.8500000238418579,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Floor_Seam_Block_0",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          -1.149999976158142,
+          -0.3264999985694885,
+          0.0
+        ],
+        [
+          -0.7300000190734863,
+          -0.27649998664855957,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Floor_Seam_Block_1",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          -0.6800000071525574,
+          -0.3264999985694885,
+          0.0
+        ],
+        [
+          -0.25999999046325684,
+          -0.27649998664855957,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Floor_Seam_Block_2",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          -0.20999999344348907,
+          -0.3264999985694885,
+          0.0
+        ],
+        [
+          0.20999999344348907,
+          -0.27649998664855957,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Floor_Seam_Block_3",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          0.25999999046325684,
+          -0.3264999985694885,
+          0.0
+        ],
+        [
+          0.6800000071525574,
+          -0.27649998664855957,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Floor_Seam_Block_4",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          0.7300000190734863,
+          -0.3264999985694885,
+          0.0
+        ],
+        [
+          1.149999976158142,
+          -0.27649998664855957,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Shelf_Cross_Block_-1_0",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          -1.4500000476837158,
+          -0.3083333373069763,
+          0.0
+        ],
+        [
+          -1.25,
+          -0.25833332538604736,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Shelf_Cross_Block_-1_1",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          -1.4500000476837158,
+          0.25833332538604736,
+          0.0
+        ],
+        [
+          -1.25,
+          0.3083333373069763,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Shelf_Cross_Block_1_0",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          1.25,
+          -0.3083333373069763,
+          0.0
+        ],
+        [
+          1.4500000476837158,
+          -0.25833332538604736,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Shelf_Cross_Block_1_1",
+      "kind": "timber",
+      "phase": "04 Floor joists and blocking",
+      "bounds_m": [
+        [
+          1.25,
+          0.25833332538604736,
+          0.0
+        ],
+        [
+          1.4500000476837158,
+          0.3083333373069763,
+          0.15000000596046448
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Ply_Back",
+      "kind": "plywood",
+      "phase": "05 Plywood",
+      "bounds_m": [
+        [
+          -1.2000000476837158,
+          -0.30000001192092896,
+          0.15000000596046448
+        ],
+        [
+          1.2000000476837158,
+          0.9000000357627869,
+          0.16699999570846558
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Ply_Front",
+      "kind": "plywood",
+      "phase": "05 Plywood",
+      "bounds_m": [
+        [
+          -1.2000000476837158,
+          -0.8999999761581421,
+          0.15000000596046448
+        ],
+        [
+          1.2000000476837158,
+          -0.30299997329711914,
+          0.16699999570846558
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Ply_Cantilever_L",
+      "kind": "plywood",
+      "phase": "05 Plywood",
+      "bounds_m": [
+        [
+          -1.5,
+          -0.8999999761581421,
+          0.15000000596046448
+        ],
+        [
+          -1.2030000686645508,
+          0.8999999761581421,
+          0.16699999570846558
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Ply_Cantilever_R",
+      "kind": "plywood",
+      "phase": "05 Plywood",
+      "bounds_m": [
+        [
+          1.2030000686645508,
+          -0.8999999761581421,
+          0.15000000596046448
+        ],
+        [
+          1.5,
+          0.8999999761581421,
+          0.16699999570846558
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Roof_Rafter_0",
+      "kind": "timber",
+      "phase": "07 Rafters",
+      "bounds_m": [
+        [
+          -1.1999999284744263,
+          -1.18942129611969,
+          1.5057950019836426
+        ],
+        [
+          -1.149999976158142,
+          1.18942129611969,
+          2.035863161087036
+        ]
+      ],
+      "cut_length_m": 2.4
+    },
+    {
+      "name": "Roof_Rafter_1",
+      "kind": "timber",
+      "phase": "07 Rafters",
+      "bounds_m": [
+        [
+          -0.7299999594688416,
+          -1.18942129611969,
+          1.5057950019836426
+        ],
+        [
+          -0.6800000071525574,
+          1.18942129611969,
+          2.035863161087036
+        ]
+      ],
+      "cut_length_m": 2.4
+    },
+    {
+      "name": "Roof_Rafter_2",
+      "kind": "timber",
+      "phase": "07 Rafters",
+      "bounds_m": [
+        [
+          -0.25999999046325684,
+          -1.18942129611969,
+          1.5057950019836426
+        ],
+        [
+          -0.20999999344348907,
+          1.18942129611969,
+          2.035863161087036
+        ]
+      ],
+      "cut_length_m": 2.4
+    },
+    {
+      "name": "Roof_Rafter_3",
+      "kind": "timber",
+      "phase": "07 Rafters",
+      "bounds_m": [
+        [
+          0.20999999344348907,
+          -1.18942129611969,
+          1.5057950019836426
+        ],
+        [
+          0.25999999046325684,
+          1.18942129611969,
+          2.035863161087036
+        ]
+      ],
+      "cut_length_m": 2.4
+    },
+    {
+      "name": "Roof_Rafter_4",
+      "kind": "timber",
+      "phase": "07 Rafters",
+      "bounds_m": [
+        [
+          0.6800000071525574,
+          -1.18942129611969,
+          1.5057950019836426
+        ],
+        [
+          0.7299999594688416,
+          1.18942129611969,
+          2.035863161087036
+        ]
+      ],
+      "cut_length_m": 2.4
+    },
+    {
+      "name": "Roof_Rafter_5",
+      "kind": "timber",
+      "phase": "07 Rafters",
+      "bounds_m": [
+        [
+          1.149999976158142,
+          -1.18942129611969,
+          1.5057950019836426
+        ],
+        [
+          1.1999999284744263,
+          1.18942129611969,
+          2.035863161087036
+        ]
+      ],
+      "cut_length_m": 2.4
+    },
+    {
+      "name": "Purlin_0",
+      "kind": "timber",
+      "phase": "08 Purlins",
+      "bounds_m": [
+        [
+          -1.5,
+          -1.148313283920288,
+          2.015446662902832
+        ],
+        [
+          1.5,
+          -1.0516867637634277,
+          2.075901508331299
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Purlin_1",
+      "kind": "timber",
+      "phase": "08 Purlins",
+      "bounds_m": [
+        [
+          -1.5,
+          -0.5983132123947144,
+          1.9148751497268677
+        ],
+        [
+          1.5,
+          -0.5016868114471436,
+          1.9753299951553345
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Purlin_2",
+      "kind": "timber",
+      "phase": "08 Purlins",
+      "bounds_m": [
+        [
+          -1.5,
+          -0.048313211649656296,
+          1.8143037557601929
+        ],
+        [
+          1.5,
+          0.048313211649656296,
+          1.8747586011886597
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Purlin_3",
+      "kind": "timber",
+      "phase": "08 Purlins",
+      "bounds_m": [
+        [
+          -1.5,
+          0.5016868114471436,
+          1.713732361793518
+        ],
+        [
+          1.5,
+          0.5983132123947144,
+          1.7741872072219849
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Purlin_4",
+      "kind": "timber",
+      "phase": "08 Purlins",
+      "bounds_m": [
+        [
+          -1.5,
+          1.0516867637634277,
+          1.6131608486175537
+        ],
+        [
+          1.5,
+          1.148313283920288,
+          1.6736156940460205
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Roof_Separator_0",
+      "kind": "roof_separator",
+      "phase": "09 Roof isolation",
+      "bounds_m": [
+        [
+          -1.5,
+          -1.144266128540039,
+          2.060452699661255
+        ],
+        [
+          1.5,
+          -1.0555541515350342,
+          2.077625036239624
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Roof_Separator_1",
+      "kind": "roof_separator",
+      "phase": "09 Roof isolation",
+      "bounds_m": [
+        [
+          -1.5,
+          -0.5942660570144653,
+          1.95988130569458
+        ],
+        [
+          1.5,
+          -0.5055540800094604,
+          1.9770536422729492
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Roof_Separator_2",
+      "kind": "roof_separator",
+      "phase": "09 Roof isolation",
+      "bounds_m": [
+        [
+          -1.5,
+          -0.04426603019237518,
+          1.8593099117279053
+        ],
+        [
+          1.5,
+          0.04444590583443642,
+          1.8764822483062744
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Roof_Separator_3",
+      "kind": "roof_separator",
+      "phase": "09 Roof isolation",
+      "bounds_m": [
+        [
+          -1.5,
+          0.5057339668273926,
+          1.7587385177612305
+        ],
+        [
+          1.5,
+          0.5944459438323975,
+          1.7759108543395996
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Roof_Separator_4",
+      "kind": "roof_separator",
+      "phase": "09 Roof isolation",
+      "bounds_m": [
+        [
+          -1.5,
+          1.0557339191436768,
+          1.6581670045852661
+        ],
+        [
+          1.5,
+          1.1444458961486816,
+          1.6753393411636353
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Roof_Sheet_1",
+      "kind": "roof_sheet",
+      "phase": "10 Roof sheets",
+      "bounds_m": [
+        [
+          -1.565500020980835,
+          -1.1800317764282227,
+          1.6537187099456787
+        ],
+        [
+          -0.7204999923706055,
+          1.1841599941253662,
+          2.103665351867676
+        ]
+      ],
+      "cut_length_m": 2.4
+    },
+    {
+      "name": "Roof_Fleece_1",
+      "kind": "roof_fleece",
+      "phase": "10 Roof sheets",
+      "bounds_m": [
+        [
+          -1.565500020980835,
+          -1.1802476644515991,
+          1.6525382995605469
+        ],
+        [
+          -0.7204999923706055,
+          1.184061050415039,
+          2.1031243801116943
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Roof_Sheet_2",
+      "kind": "roof_sheet",
+      "phase": "10 Roof sheets",
+      "bounds_m": [
+        [
+          -0.8034999966621399,
+          -1.1800317764282227,
+          1.6537187099456787
+        ],
+        [
+          0.041499972343444824,
+          1.1842858791351318,
+          2.104353904724121
+        ]
+      ],
+      "cut_length_m": 2.4
+    },
+    {
+      "name": "Roof_Fleece_2",
+      "kind": "roof_fleece",
+      "phase": "10 Roof sheets",
+      "bounds_m": [
+        [
+          -0.6824000477790833,
+          -1.1802476644515991,
+          1.6525382995605469
+        ],
+        [
+          0.041499972343444824,
+          1.184061050415039,
+          2.1031243801116943
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Roof_Sheet_3",
+      "kind": "roof_sheet",
+      "phase": "10 Roof sheets",
+      "bounds_m": [
+        [
+          -0.041499972343444824,
+          -1.1800317764282227,
+          1.6537187099456787
+        ],
+        [
+          0.8034999370574951,
+          1.1842858791351318,
+          2.104353904724121
+        ]
+      ],
+      "cut_length_m": 2.4
+    },
+    {
+      "name": "Roof_Fleece_3",
+      "kind": "roof_fleece",
+      "phase": "10 Roof sheets",
+      "bounds_m": [
+        [
+          0.07959997653961182,
+          -1.1802476644515991,
+          1.6525382995605469
+        ],
+        [
+          0.8034999370574951,
+          1.184061050415039,
+          2.1031243801116943
+        ]
+      ],
+      "cut_length_m": null
+    },
+    {
+      "name": "Roof_Sheet_4",
+      "kind": "roof_sheet",
+      "phase": "10 Roof sheets",
+      "bounds_m": [
+        [
+          0.7204999923706055,
+          -1.1800317764282227,
+          1.6537187099456787
+        ],
+        [
+          1.565500020980835,
+          1.1842858791351318,
+          2.104353904724121
+        ]
+      ],
+      "cut_length_m": 2.4
+    },
+    {
+      "name": "Roof_Fleece_4",
+      "kind": "roof_fleece",
+      "phase": "10 Roof sheets",
+      "bounds_m": [
+        [
+          0.8415999412536621,
+          -1.1802476644515991,
+          1.6525382995605469
+        ],
+        [
+          1.565500020980835,
+          1.184061050415039,
+          2.1031243801116943
+        ]
+      ],
+      "cut_length_m": null
+    }
+  ]
+}

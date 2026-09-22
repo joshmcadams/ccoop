@@ -1,0 +1,37 @@
+{
+  "baseline": {
+    "roof_sheets_checked": 4,
+    "roof_static_pairs_checked": 202,
+    "roof_intersections": 0,
+    "solid_pairs_checked": 946,
+    "solid_intersections": 0,
+    "notched_panels_checked": 2,
+    "rafter_bearing_seats_checked": 12,
+    "post_stock_and_embedment_checked": 6,
+    "two_sheet_kerf_check": "passed",
+    "structural_capacity": "not evaluated"
+  },
+  "animation": {
+    "roof_path_pairs_checked": 3692,
+    "roof_path_intersections": 0,
+    "plywood_path_pairs_checked": 1301,
+    "plywood_path_intersections": 0,
+    "assembled_holds": "passed"
+  },
+  "floating rafter": "correctly rejected",
+  "uncut plywood": "correctly rejected",
+  "insufficient post stock": "correctly rejected",
+  "floating roof sheet": "correctly rejected",
+  "restored_baseline": {
+    "roof_sheets_checked": 4,
+    "roof_static_pairs_checked": 202,
+    "roof_intersections": 0,
+    "solid_pairs_checked": 946,
+    "solid_intersections": 0,
+    "notched_panels_checked": 2,
+    "rafter_bearing_seats_checked": 12,
+    "post_stock_and_embedment_checked": 6,
+    "two_sheet_kerf_check": "passed",
+    "structural_capacity": "not evaluated"
+  }
+}

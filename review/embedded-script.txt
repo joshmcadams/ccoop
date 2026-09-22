@@ -1,0 +1,134 @@
+import bpy
+import math
+
+# Clear the scene
+bpy.ops.object.select_all(action='SELECT')
+bpy.ops.object.delete()
+
+def make_material(name, color):
+    if name in bpy.data.materials:
+        return bpy.data.materials[name]
+    mat = bpy.data.materials.new(name=name)
+    mat.use_nodes = True
+    mat.node_tree.nodes["Principled BSDF"].inputs['Base Color'].default_value = color
+    return mat
+
+mat_post = make_material('TreatedPost', (0.3, 0.4, 0.2, 1))
+mat_wood = make_material('Timber', (0.8, 0.6, 0.3, 1))
+mat_ply = make_material('Plywood', (0.9, 0.8, 0.6, 1))
+mat_roof = make_material('Roof', (0.2, 0.2, 0.25, 1))
+mat_ground = make_material('Ground', (0.1, 0.3, 0.1, 1))
+mat_door = make_material('Door', (0.7, 0.4, 0.2, 1))
+
+# Add Sloped Ground
+bpy.ops.mesh.primitive_plane_add(size=12, location=(0, 0, -0.6))
+ground = bpy.context.object
+ground.name = "Ground"
+ground.rotation_euler = (math.radians(-10), 0, 0)
+ground.data.materials.append(mat_ground)
+
+# Coop dimensions
+w = 2.4 # 8 ft wide
+d = 1.8 # 6 ft deep
+h_front = 1.8 # Floor to roof height at front
+h_back = 1.2  # Floor to roof height at back
+floor_h = 0.6 # Floor height above 0
+
+# 1. Posts (6 round posts)
+post_locs = [
+    (-w/2, -d/2), (0, -d/2), (w/2, -d/2),  # Front row
+    (-w/2, d/2),  (0, d/2),  (w/2, d/2)    # Back row
+]
+
+roof_angle = math.atan2(h_front - h_back, d)
+
+for i, (x, y) in enumerate(post_locs):
+    distance_from_front = y - (-d/2)
+    drop = distance_from_front * math.tan(roof_angle)
+    post_top_z = (floor_h + h_front) - drop
+
+    p_h = post_top_z + 1.0
+
+    bpy.ops.mesh.primitive_cylinder_add(radius=0.06, depth=p_h, location=(x, y, post_top_z - (p_h/2)))
+    post = bpy.context.object
+    post.name = f"Post_{i}"
+    post.data.materials.append(mat_post)
+
+# 2. Floor Bearers
+bpy.ops.mesh.primitive_cube_add(scale=(w/2, 0.05, 0.1), location=(0, -d/2, floor_h - 0.1))
+bpy.context.object.name = "Bearer_Front"
+bpy.context.object.data.materials.append(mat_wood)
+
+bpy.ops.mesh.primitive_cube_add(scale=(w/2, 0.05, 0.1), location=(0, d/2, floor_h - 0.1))
+bpy.context.object.name = "Bearer_Back"
+bpy.context.object.data.materials.append(mat_wood)
+
+# Floor
+bpy.ops.mesh.primitive_cube_add(scale=(w/2 + 0.1, d/2 + 0.1, 0.02), location=(0, 0, floor_h))
+bpy.context.object.name = "Floor"
+bpy.context.object.data.materials.append(mat_ply)
+
+# 3. Walls
+# Front wall (tall)
+bpy.ops.mesh.primitive_cube_add(scale=(w/2, 0.01, h_front/2), location=(0, -d/2, floor_h + h_front/2))
+bpy.context.object.data.materials.append(mat_ply)
+# Back wall (short)
+bpy.ops.mesh.primitive_cube_add(scale=(w/2, 0.01, h_back/2), location=(0, d/2, floor_h + h_back/2))
+bpy.context.object.data.materials.append(mat_ply)
+# Left wall
+bpy.ops.mesh.primitive_cube_add(scale=(0.01, d/2, h_front/2), location=(-w/2, 0, floor_h + h_front/2))
+bpy.context.object.data.materials.append(mat_ply)
+# Right wall
+bpy.ops.mesh.primitive_cube_add(scale=(0.01, d/2, h_front/2), location=(w/2, 0, floor_h + h_front/2))
+bpy.context.object.data.materials.append(mat_ply)
+
+# 4. Roof (Slanted)
+roof_y_len = d + 0.8
+roof_center_z = floor_h + (h_front + h_back)/2
+bpy.ops.mesh.primitive_cube_add(scale=(w/2 + 0.4, roof_y_len/2, 0.02), location=(0, 0, roof_center_z))
+roof = bpy.context.object
+roof.name = "Roof"
+roof.rotation_euler = (-roof_angle, 0, 0)
+roof.data.materials.append(mat_roof)
+
+# 5. Nesting Box on Left Side
+bpy.ops.mesh.primitive_cube_add(scale=(0.3, 0.6, 0.3), location=(-w/2 - 0.3, 0, floor_h + 0.4))
+nest = bpy.context.object
+nest.name = "NestingBox"
+nest.data.materials.append(mat_ply)
+
+# 6. Roosting bars inside
+bpy.ops.mesh.primitive_cylinder_add(radius=0.025, depth=w-0.2, location=(0, 0, floor_h + 0.5))
+bpy.context.object.name = "Roost_1"
+bpy.context.object.rotation_euler = (0, math.radians(90), 0)
+bpy.context.object.data.materials.append(mat_wood)
+
+bpy.ops.mesh.primitive_cylinder_add(radius=0.025, depth=w-0.2, location=(0, 0.4, floor_h + 0.6))
+bpy.context.object.name = "Roost_2"
+bpy.context.object.rotation_euler = (0, math.radians(90), 0)
+bpy.context.object.data.materials.append(mat_wood)
+
+# 7. DOORS & HATCHES
+# Human Door (Front, right side) - Swung open
+bpy.ops.mesh.primitive_cube_add(scale=(0.4, 0.02, 0.7), location=(w/4 + 0.2, -d/2 - 0.3, floor_h + 0.7))
+human_door = bpy.context.object
+human_door.rotation_euler = (0, 0, math.radians(60))
+human_door.data.materials.append(mat_door)
+
+# Chicken Door & Ramp (Front, left side) - Swung open
+bpy.ops.mesh.primitive_cube_add(scale=(0.15, 0.02, 0.2), location=(-w/4, -d/2 - 0.1, floor_h + 0.2))
+chicken_door = bpy.context.object
+chicken_door.rotation_euler = (0, 0, math.radians(-45))
+chicken_door.data.materials.append(mat_door)
+
+# Chicken Ramp
+bpy.ops.mesh.primitive_cube_add(scale=(0.15, 0.6, 0.02), location=(-w/4 + 0.15, -d/2 - 0.5, floor_h - 0.35))
+ramp = bpy.context.object
+ramp.rotation_euler = (math.radians(35), 0, 0)
+ramp.data.materials.append(mat_wood)
+
+# Clean-out Hatch (Back Wall) - Swung UP like an awning
+bpy.ops.mesh.primitive_cube_add(scale=(w/2 - 0.1, 0.02, 0.4), location=(0, d/2 + 0.2, floor_h + 0.7))
+hatch = bpy.context.object
+hatch.rotation_euler = (math.radians(60), 0, 0)
+hatch.data.materials.append(mat_door)

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "status": "geometry coordination draft; connections and site design pending",
+  "site": {
+    "slope_degrees": 10.0,
+    "ground_at_origin_m": -0.6,
+    "embedment_m": 0.6,
+    "confirmed": false,
+    "location": "Coatesville, Auckland, New Zealand",
+    "reported_wind_exposure": "Some wind, typically not too severe (user description)",
+    "wind_zone": null
+  },
+  "floor": {
+    "width_m": 2.4,
+    "depth_m": 1.8,
+    "bearer_length_m": 3.0,
+    "framing_top_m": 0.15,
+    "timber_width_m": 0.05,
+    "timber_depth_m": 0.15,
+    "ply_thickness_m": 0.017,
+    "sheet_gap_m": 0.003,
+    "saw_kerf_m": 0.003
+  },
+  "posts": {
+    "diameter_m": 0.12,
+    "stock_length_m": 3.0,
+    "treatment_intent": "H5 structural poles; grade and diameter to be confirmed"
+  },
+  "roof": {
+    "front_bearer_top_m": 1.89,
+    "rear_bearer_top_m": 1.57,
+    "rafter_depth_m": 0.1,
+    "rafter_width_m": 0.05,
+    "rafter_length_m": 2.4,
+    "seat_depth_at_centre_m": 0.01,
+    "purlin_width_m": 0.09,
+    "purlin_depth_m": 0.045,
+    "covering_intent": "Four corrugated steel sheets; factory condensation fleece candidate; supplier/exposure/fixings pending",
+    "sheet_count": 4,
+    "sheet_length_m": 2.4,
+    "sheet_width_m": 0.845,
+    "sheet_cover_m": 0.762,
+    "corrugation_pitch_m": 0.0762,
+    "corrugation_height_m": 0.018,
+    "sheet_bmt_m": 0.00055,
+    "fleece_thickness_m": 0.0012,
+    "separator_thickness_m": 0.001
+  },
+  "hardware": {
+    "bolt_diameter_m": 0.012,
+    "bolt_length_m": 0.2,
+    "connection_design_confirmed": false
+  },
+  "flock": {
+    "target": 12,
+    "layout_confirmed": false
+  },
+  "access": {
+    "service_mode": "primarily external hatches; crouched entry acceptable",
+    "standing_headroom_required": false,
+    "rear_cleanout": "two separate top-hinged flaps around retained centre pole; detail pending",
+    "floor_height_decision": "confirmed: floor and roof lowered together by 450 mm; internal headroom unchanged"
+  }
+}
