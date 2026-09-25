@@ -4,7 +4,7 @@
 
 Read [handoff.md](handoff.md) for current progress, [DESIGN.md](DESIGN.md) for design decisions, [BUILD.md](BUILD.md) for the intended construction sequence, and [README.md](README.md) for commands. Check [SUPPLIES.md](SUPPLIES.md) when changing parts or quantities.
 
-This project is a **geometry coordination draft**, not a completed construction release. Geometry checks do not establish structural capacity. Foundations, temporary/permanent bracing, supplier-specific connectors, wall framing, nests, ventilation and enclosure details remain unresolved. Hatches are a documented proposal, not modelled parts. Preserve these distinctions when reporting progress.
+This project is a **geometry coordination draft**, not a completed construction release. Geometry checks do not establish structural capacity. Foundations, temporary/permanent bracing, supplier-specific connectors, wall connections, nests, ventilation and enclosure details remain unresolved. Hatches are a documented proposal, not modelled parts. Preserve these distinctions when reporting progress.
 
 ## Current User Decisions
 
@@ -13,9 +13,14 @@ This project is a **geometry coordination draft**, not a completed construction 
 - Outside flap access is preferred; crouched entry is acceptable. **Standing headroom is not required.**
 - The user approved lowering the floor and roof together **450 mm**. Do not revert to the old elevations or raise the roof for standing access.
 - Current framing top is **Z=150 mm**, plywood top **Z=167 mm**; roof bearer tops are **Z=1890 mm front / 1570 mm rear**. Z=0 is a modelling datum, not ground.
-- The floor is approximately **628 mm front / 906 mm rear** above provisional ground at the pole rows. Pole cuts are approximately **2951 / 2909 mm**, fitting provisional **3.0 m stock** with the current 600 mm embedment assumption.
+- The floor is approximately **624 mm front / 910 mm rear** above provisional ground at the pole rows. Pole cuts are approximately **2947 / 2913 mm**, fitting provisional **3.0 m stock** with the current 600 mm embedment assumption (about 53 mm spare at the front).
 - Retain the **2400 × 1800 mm main platform**, **3.0 m uncut floor bearers** and rear centre pole. Plan separate rear clean-out openings around that pole.
-- No existing material inventory has been specified. Actual site levels, timber grades/sections and foundation design must be resolved before a purchase/cut list is final.
+- No existing material inventory has been specified. Actual site levels, timber grades and foundation design must be resolved before a purchase/cut list is final.
+- **25 September 2026 audit decisions** (see [AUDIT.md](AUDIT.md) for findings and reasoning):
+  - Use **dressed (gauged) timber**: 140 × 45 for all structural framing (bearers, joists, sisters, blocking, roof bearers, rafters) and 90 × 45 for walls and purlins. Do not revert to rough-sawn 150 × 50 / 100 × 50. Rafters at 140 × 45 was Claude's recommendation; the user may still choose 90 × 45 to save cost, subject to a span check.
+  - Apply a **pole tolerance rule**: never place timber tangent to a round pole. Bearers bear on a flat with a bearing shoulder cut into the pole; every other member keeps the configured clearance, which the validator enforces.
+  - **Walls reach the roof members**, with **eave vents** in the rafter bays above both bearers.
+  - **Nests sit on the side shelves.**
 
 These are the current baseline decisions. When the user changes them, update the inputs and affected documents together; do not let this summary become a competing source of dimensions.
 
@@ -29,7 +34,7 @@ These are the current baseline decisions. When the user changes them, update the
 6. For each major design change, update DESIGN.md and BUILD.md with both the decision and its reason; update SUPPLIES.md for quantities, handoff.md for status/next work, and this file when durable user decisions or workflow rules change. Update README.md when commands or validation coverage change.
 7. Report what was changed, what was checked and what remains unresolved. Do not turn illustrative hardware, provisional sizes or a passing collision check into a claim of structural approval. Do not mark an unmodelled phase complete.
 
-The generator checks final timber/post/plywood intersections, notch volumes, rafter seats, stock/embedment arithmetic, kerf allowances, integer-frame plywood and roof-sheet installation paths, roof sheet/support/lap geometry and selected completed holds. It does **not** check structural capacity, all moving assemblies, every subframe, terrain/footings or supplier-specific hardware fit. Read the actual validation code before expanding those claims.
+The generator checks final timber/post/plywood intersections, notch volumes, rafter seats, stock/embedment arithmetic, kerf allowances, integer-frame plywood and roof-sheet installation paths, roof sheet/support/lap geometry and selected completed holds. It also checks the pole tolerance rule (clearance probe around every pole, worst-case bolt length), wall top plates meeting the roof and clear eave vents. It does **not** check structural capacity, all moving assemblies, every subframe, terrain/footings, joist-hanger fit or supplier-specific hardware fit. Read the actual validation code before expanding those claims.
 
 
 ## Working with the User
@@ -43,7 +48,7 @@ The generator checks final timber/post/plywood intersections, notch volumes, raf
 
 ## Parts and Cost Tracking
 
-Keep SUPPLIES.md consistent with model quantities and the stock cutting plan. Separate finished parts from purchased stock to avoid charging twice for reused offcuts. Record price source, date, currency, GST basis, stock length, actual section/grade and delivery exclusions. Label unpriced items explicitly; never treat them as zero or call a priced subset the whole-coop estimate. Do not sum alternative products, double-count nuts included with bolts, or substitute different timber sections/treatment to fill a price. Current pricing covers only floor plywood and bolt/nut assemblies; see SUPPLIES.md for the remaining quote requirements.
+Keep SUPPLIES.md consistent with model quantities and the stock cutting plan. Separate finished parts from purchased stock to avoid charging twice for reused offcuts. Record price source, date, currency, GST basis, stock length, actual section/grade and delivery exclusions. Label unpriced items explicitly; never treat them as zero or call a priced subset the whole-coop estimate. Do not sum alternative products, double-count nuts included with bolts, or substitute different timber sections/treatment to fill a price. Current pricing covers only floor plywood and bolt/nut assemblies, plus an indicative per-metre reference for dressed 140 × 45 that is kept outside the priced subset; see SUPPLIES.md for the remaining quote requirements.
 
 ## Working with Blender via Python
 
@@ -56,4 +61,11 @@ Keep SUPPLIES.md consistent with model quantities and the stock cutting plan. Se
 
 ## Roof Covering Baseline
 
-The roof covering placement stage now follows purlins. Current scene ends at frame 680; frame 465 shows bare roof framing. Four 2400-long representative corrugated sheets use 845 overall width / 762 cover, candidate factory fleece and five isolation strips. These are provisional product choices, not new user-approved purchasing specifications. Preserve the distinction between sheet placement and a secured, weatherproof roof: actual fixings, edge flashings, ventilation, drainage and structural prerequisites remain open. Update roof quantities, geometry checks and animation when selecting the final product; do not replace fleece-backed sheets with plain sheets without first designing and sequencing condensation control.
+Wall framing now precedes roof framing and covering. Current scene ends at frame 900; frame 465 shows walls before the roof; frame 620 shows bare roof framing. Four 2400-long representative corrugated sheets use 845 overall width / 762 cover, candidate factory fleece and seven isolation strips (five field purlins plus two eave purlins). These are provisional product choices, not new user-approved purchasing specifications. Preserve the distinction between sheet placement and a secured, weatherproof roof: actual fixings, edge flashings, ventilation, drainage and structural prerequisites remain open. Update roof quantities, geometry checks and animation when selecting the final product; do not replace fleece-backed sheets with plain sheets without first designing and sequencing condensation control.
+
+
+## Current Layout and Animation Direction
+
+User confirmed nesting boxes on both narrow sides: two each, four total. Dimension their clear interiors and coordinate openings before constructing shells. Nests sit on the side shelves: four provisional 350 × 350 × 400 clear-space guides with the liner floor level with the side sole plate. Actual shells, liners, lip boards and lids remain unbuilt. Front service and separate pop-hole, plus two rear cleaning openings around the centre pole, now have rough opening frames. Walls reach the roof members; the rafter bays above both bearers are the eave vents. See DESIGN.md for dimensions, the pole tolerance rule and pole-junction allowances. Never equate wire guides with constructed parts or include them in procurement totals.
+
+The user requires actual construction order, with a quick fixed-camera animation first and camera panning/tutorial call-outs later. Frames must precede their supported components; upper studs follow headers; walls precede roof installation in this revision. Unresolved footings, temporary/permanent bracing and connections must remain explicit prerequisites, not silently implied completed stages. Frame 900 is the current final state.

@@ -66,6 +66,43 @@ must_reject('floating roof sheet')
 obj.location=original
 bpy.context.view_layer.update()
 
+obj=bpy.data.objects['Wall_Front_Left_Sole']
+original=obj.location.copy()
+obj.location.z+=.03
+bpy.context.view_layer.update()
+must_reject('floating wall sole plate')
+obj.location=original
+bpy.context.view_layer.update()
+
+# Pole tolerance rule: a pole set 5 mm towards the edge joist breaks the clearance
+# without any solid overlap, which the intersection check alone would miss.
+obj=bpy.data.objects['Post_Front_2']
+original=obj.location.copy()
+obj.location.x+=.005
+bpy.context.view_layer.update()
+must_reject('pole inside clearance envelope')
+obj.location=original
+bpy.context.view_layer.update()
+
+# A floating block in a rafter bay blocks an eave vent without touching anything.
+bpy.ops.mesh.primitive_cube_add(size=1,location=(0,-(f['depth_m']-f['timber_width_m'])/2,cfg['roof']['front_bearer_top_m']+.04))
+block=bpy.context.object
+block.dimensions=(.1,.03,.05)
+block['kind']='timber'
+bpy.context.view_layer.update()
+must_reject('blocked eave vent')
+mesh=block.data;bpy.data.objects.remove(block,do_unlink=True);bpy.data.meshes.remove(mesh)
+bpy.context.view_layer.update()
+
+bad=copy.deepcopy(cfg)
+bad['hardware']['bolt_length_m']=.17
+try:
+    validate_config(bad)
+except AssertionError:
+    results['bolt too short for worst-case pole']='correctly rejected'
+else:
+    raise AssertionError('Regression was not detected: short bolt')
+
 results['restored_baseline']=validate_geometry(s,cfg,derived)
 (ROOT/'generated'/'regression-results.json').write_text(json.dumps(results,indent=2)+'\n')
 print('COOP_REGRESSIONS_OK',json.dumps(results))

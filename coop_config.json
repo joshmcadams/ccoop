@@ -15,22 +15,27 @@
     "depth_m": 1.8,
     "bearer_length_m": 3.0,
     "framing_top_m": 0.15,
-    "timber_width_m": 0.05,
-    "timber_depth_m": 0.15,
+    "timber_width_m": 0.045,
+    "timber_depth_m": 0.14,
     "ply_thickness_m": 0.017,
     "sheet_gap_m": 0.003,
-    "saw_kerf_m": 0.003
+    "saw_kerf_m": 0.003,
+    "timber_note": "dressed (gauged) 140 x 45 H3.2 SG8 actual section; user decision 25 Sep 2026"
   },
   "posts": {
     "diameter_m": 0.12,
+    "diameter_allowance_m": 0.02,
+    "setout_tolerance_m": 0.01,
+    "bearer_flat_depth_m": 0.015,
     "stock_length_m": 3.0,
-    "treatment_intent": "H5 structural poles; grade and diameter to be confirmed"
+    "treatment_intent": "H5 structural poles; grade and diameter to be confirmed",
+    "tolerance_note": "diameter is the nominal design size; allowance covers taper and size-class variation at the floor/roof connections; clearance to non-bearing timber = allowance/2 + set-out tolerance"
   },
   "roof": {
     "front_bearer_top_m": 1.89,
     "rear_bearer_top_m": 1.57,
-    "rafter_depth_m": 0.1,
-    "rafter_width_m": 0.05,
+    "rafter_depth_m": 0.14,
+    "rafter_width_m": 0.045,
     "rafter_length_m": 2.4,
     "seat_depth_at_centre_m": 0.01,
     "purlin_width_m": 0.09,
@@ -44,7 +49,16 @@
     "corrugation_height_m": 0.018,
     "sheet_bmt_m": 0.00055,
     "fleece_thickness_m": 0.0012,
-    "separator_thickness_m": 0.001
+    "separator_thickness_m": 0.001,
+    "rafter_note": "140 x 45 dressed; Claude recommendation for margin, one structural section and taller eave vents; 90 x 45 is a cheaper alternative pending a span check",
+    "purlin_note": "five field purlins (plan Y, metres) plus one eave purlin over each roof bearer, derived from the bearer line; eave purlins close the roof edge above the rafter-bay vents",
+    "field_purlin_centres_y": [
+      -1.1,
+      -0.55,
+      0.0,
+      0.55,
+      1.1
+    ]
   },
   "hardware": {
     "bolt_diameter_m": 0.012,
@@ -60,5 +74,24 @@
     "standing_headroom_required": false,
     "rear_cleanout": "two separate top-hinged flaps around retained centre pole; detail pending",
     "floor_height_decision": "confirmed: floor and roof lowered together by 450 mm; internal headroom unchanged"
+  },
+  "layout": {
+    "nests_each_narrow_side": 2,
+    "nest_support": "nest shells sit on the side shelves; liner floor level with the side-wall sole plate top",
+    "nest_clear_width_m": 0.35,
+    "nest_clear_depth_m": 0.35,
+    "nest_clear_height_m": 0.4,
+    "nest_lip_board_height_m": 0.1,
+    "nest_lip_board_thickness_m": 0.02,
+    "nest_shell_thickness_m": 0.015,
+    "wall_tops": "front/rear top plates under the roof bearers; side top plates under the edge rafters, parallel to the roof",
+    "cleanout_height_m": 0.8,
+    "pophole_width_m": 0.4,
+    "pophole_height_m": 0.45,
+    "status": "provisional dimensioned layout; opening sizes exclude door leaves, lip boards and seals"
+  },
+  "ventilation": {
+    "eave_vents": "mesh-covered rafter bays above both roof bearers; mesh and closures not yet modelled",
+    "mesh_selected": false
   }
 }

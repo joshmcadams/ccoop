@@ -123,8 +123,9 @@ def animate(obj, start, end, offset=(0, 0, 1.2), waypoints=None):
         obj.keyframe_insert(data_path=path, frame=start)
 
 
-def bolt_set(prefix, x, side, z, y_outer, post_diameter, length, diameter, mat, phase):
-    # Smooth head outside, shaft travels inward. Washer/nut remain beyond pole face.
+def bolt_set(prefix, x, side, z, y_outer, through, length, diameter, mat, phase):
+    # Smooth head outside, shaft travels inward through the bearer and the
+    # flatted pole (`through`). Washer/nut remain beyond the pole face.
     direction = -side
     shaft = cylinder(prefix+'_Shaft', (x, y_outer+direction*length/2, z), diameter/2, length, phase, mat, axis_y=True)
     bpy.ops.mesh.primitive_uv_sphere_add(segments=16, ring_count=8, radius=1, location=(x, y_outer+side*.004, z))
@@ -132,7 +133,7 @@ def bolt_set(prefix, x, side, z, y_outer, post_diameter, length, diameter, mat, 
     head.scale = (.014, .004, .014)
     bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
     finish(head, prefix+'_DomedHead', phase, mat, 'hardware')
-    inner = y_outer+direction*(.05+post_diameter)
+    inner = y_outer+direction*through
     washer = cylinder(prefix+'_Washer', (x, inner+direction*.002, z), .015, .004, phase, mat, axis_y=True)
     nut = cylinder(prefix+'_Nut', (x, inner+direction*.009, z), .0105, .01, phase, mat, axis_y=True, vertices=6)
     # Hardware is diagrammatic. Rings/threads/drilled holes are not represented.
@@ -163,20 +164,20 @@ def roof_strip(name, x0, x1, length, thickness, height_fn, origin, pitch, mat, k
     obj=bpy.data.objects.new(name,mesh)
     bpy.context.scene.collection.objects.link(obj)
     obj.location=origin; obj.rotation_euler.x=-pitch
-    return finish(obj,name,'10 Roof sheets',mat,kind)
+    return finish(obj,name,'13 Roof sheets',mat,kind)
 
 
-def add_roof_covering(r, pitch, top_plane, derived):
+def add_roof_covering(r, pitch, top_plane, purlin_ys, derived):
     steel=material('Roof — provisional grey coated steel',(.24,.30,.32),.65)
     fleece=material('Factory bonded condensation fleece — candidate',(.62,.65,.63))
     separator=material('Compatible purlin isolation strip — provisional',(.07,.07,.07))
     normal=Vector((0,math.sin(pitch),math.cos(pitch)))
     base=Vector((0,0,top_plane+r['purlin_depth_m']/math.cos(pitch)))
     width=r['sheet_width_m']+(r['sheet_count']-1)*r['sheet_cover_m']
-    for i,y in enumerate([-1.1,-.55,0,.55,1.1]):
+    for i,y in enumerate(purlin_ys):
         center=Vector((0,y,base.z-math.tan(pitch)*y))+normal*r['separator_thickness_m']/2
         box(f'Roof_Separator_{i}',center,(3,r['purlin_width_m'],r['separator_thickness_m']),
-            '09 Roof isolation',separator,'roof_separator',-pitch)
+            '12 Roof isolation',separator,'roof_separator',-pitch)
     origin=base+Vector((-width/2,0,0))
     lap=r['sheet_width_m']-r['sheet_cover_m']
     for i in range(r['sheet_count']):
@@ -225,7 +226,7 @@ def main():
     s.name = 'Coop — geometry coordination'
     s.unit_settings.system = 'METRIC'
     s.unit_settings.length_unit = 'MILLIMETERS'
-    s.frame_start, s.frame_end = 1, 680
+    s.frame_start, s.frame_end = 1, 900
     s.render.fps = 24
     s['design_status'] = cfg['status']
     wood = material('H3.2 timber', (.55,.31,.12))
@@ -236,14 +237,29 @@ def main():
     w, d, bw, bh, z = f['width_m'],f['depth_m'],f['timber_width_m'],f['timber_depth_m'],f['framing_top_m']
     t, gap, kerf = f['ply_thickness_m'], f['sheet_gap_m'], f['saw_kerf_m']
     rad = p['diameter_m']/2
-    post_x = w/2-bw-rad
-    post_y = d/2-bw-rad
+    # Pole tolerance rule (AUDIT.md finding 1). Nothing is tangent to a round pole:
+    # bearers bear on a flat with a shoulder cut into the pole; every other member
+    # keeps `clear` from the nominal pole surface (taper/size allowance + set-out).
+    clear = p['diameter_allowance_m']/2+p['setout_tolerance_m']
+    flat = p['bearer_flat_depth_m']
+    post_x = w/2-bw-rad-clear
+    post_y = d/2-bw-(rad-flat)
     by = d/2-bw/2
     pitch = math.atan2(r['front_bearer_top_m']-r['rear_bearer_top_m'],2*by)
     slope = math.tan(pitch)
     mean_top = (r['front_bearer_top_m']+r['rear_bearer_top_m'])/2
     joists = [-f['bearer_length_m']/2+bw/2] + [-w/2+bw/2+i*(w-bw)/5 for i in range(6)] + [f['bearer_length_m']/2-bw/2]
     derived = {'roof_pitch_degrees':math.degrees(pitch), 'joist_centres_m':joists, 'post_grid_m':[2*post_x,2*post_y], 'posts':[]}
+    # Worst-case bolt path: fattest accepted pole, set out away from the bearer.
+    rad_max = rad+p['diameter_allowance_m']/2
+    bolt_len = cfg['hardware']['bolt_length_m']
+    through_nominal = bw+rad+(rad-flat)
+    through_max = bw+rad_max+(rad-flat)+p['setout_tolerance_m']
+    derived['pole_rule'] = {'nominal_diameter_m':p['diameter_m'],'max_accepted_diameter_m':2*rad_max,
+        'clearance_to_non_bearing_timber_m':clear,'nominal_flat_depth_m':flat,
+        'flat_depth_range_m':[max(0,flat-p['setout_tolerance_m']),rad_max-(rad-flat)+p['setout_tolerance_m']],
+        'bolt_thread_past_nut_m':{'nominal':bolt_len-through_nominal-.014,'worst_case':bolt_len-through_max-.014},
+        'status':'coordination rule; measure delivered poles at floor and roof levels and re-run'}
     ground = box('Ground', (0,0,site['ground_at_origin_m']-.02/math.cos(math.radians(site['slope_degrees']))), (8,8,.04), '00 Site', groundmat, 'terrain', -math.radians(site['slope_degrees']))
     for side, row in [(-1,'Front'),(1,'Back')]:
         top = r['front_bearer_top_m'] if side < 0 else r['rear_bearer_top_m']
@@ -255,17 +271,25 @@ def main():
             if length > p['stock_length_m']:
                 raise ValueError(f'{row} post needs {length:.3f} m; exceeds stock')
             obj = cylinder(f'Post_{row}_{i}', (x,y,(top+bottom)/2),rad,length,'01 Posts',polemat,'post')
+            # Flat with a bearing shoulder at each bearer: the bearer face stays in one
+            # plane and sits on the shoulder, instead of touching a curve along a line.
+            inner_face = side*(d/2-bw)
+            subtract_box(obj,(x,inner_face+side*.05,z-bh/2),(.2,.1,bh))
+            subtract_box(obj,(x,inner_face+side*.05,top-bh/2+.025),(.2,.1,bh+.05))
             obj['cut_length_m'] = length
+            obj['bearer_flat_depth_m'] = flat
+            obj['clearance_m'] = clear
             obj['ground_elevation_m'] = g
             obj['embedment_m'] = site['embedment_m']
             obj['design_status'] = 'diameter, embedment and footing design provisional'
             derived['posts'].append({'name':obj.name,'length_m':length,'ground_m':g,'bottom_m':bottom,'top_m':top})
         box('Bearer_'+row,(0,side*by,z-bh/2),(f['bearer_length_m'],bw,bh),'02 Floor bearers',wood)
-        box('Roof_Bearer_'+row,(0,side*by,top-bh/2),(w,bw,bh),'06 Roof bearers',wood)
+        box('Roof_Bearer_'+row,(0,side*by,top-bh/2),(w,bw,bh),'09 Roof bearers',wood)
         for i,x in enumerate([-post_x,0,post_x]):
-            for j,dz in enumerate([.045,.105]):
-                bolt_set(f'FloorBolt_{row}_{i}_{j}',x,side,z-dz,side*d/2,p['diameter_m'],cfg['hardware']['bolt_length_m'],cfg['hardware']['bolt_diameter_m'],metal,'03 Floor bolts')
-                bolt_set(f'RoofBolt_{row}_{i}_{j}',x,side,top-dz,side*d/2,p['diameter_m'],cfg['hardware']['bolt_length_m'],cfg['hardware']['bolt_diameter_m'],metal,'06 Roof bearers')
+            # Two bolts 60 apart, centred on the bearer depth.
+            for j,dz in enumerate([bh/2-.03,bh/2+.03]):
+                bolt_set(f'FloorBolt_{row}_{i}_{j}',x,side,z-dz,side*d/2,through_nominal,bolt_len,cfg['hardware']['bolt_diameter_m'],metal,'03 Floor bolts')
+                bolt_set(f'RoofBolt_{row}_{i}_{j}',x,side,top-dz,side*d/2,through_nominal,bolt_len,cfg['hardware']['bolt_diameter_m'],metal,'09 Roof bearers')
     for i,x in enumerate(joists):
         box(f'Joist_{i}',(x,0,z-bh/2),(bw,d-2*bw,bh),'04 Floor joists and blocking',wood)
     # Sister the two main floor edge joists to give the shelf its own 50 mm bearing.
@@ -282,11 +306,13 @@ def main():
     back = box('Ply_Back',(0,d/2-.6,z+t/2),(w,1.2,t),'05 Plywood',plymat,'plywood')
     front_depth = d-1.2-gap
     front = box('Ply_Front',(0,-d/2+front_depth/2,z+t/2),(w,front_depth,t),'05 Plywood',plymat,'plywood')
-    notch_depth = d/2-post_y+rad+.005
+    # Rough notches keep the pole clearance; seal to the actual pole on site.
+    notch_depth = d/2-post_y+rad+clear
+    notch_width = 2*(rad+clear)
     for obj,side in [(back,1),(front,-1)]:
         for x in [-post_x,0,post_x]:
-            subtract_box(obj,(x,side*(d/2-notch_depth/2+.001),z+t/2),(.13,notch_depth+.002,t+.04))
-        obj['notch_width_m'] = .13
+            subtract_box(obj,(x,side*(d/2-notch_depth/2+.001),z+t/2),(notch_width,notch_depth+.002,t+.04))
+        obj['notch_width_m'] = notch_width
         obj['notch_depth_m'] = notch_depth
     shelf_width = (f['bearer_length_m']-w)/2-gap
     for side in (-1,1):
@@ -295,35 +321,56 @@ def main():
     bottom_plane = mean_top-r['seat_depth_at_centre_m']
     center_height = bottom_plane+r['rafter_depth_m']/(2*math.cos(pitch))
     for i,x in enumerate(joists[1:7]):
-        obj = box(f'Roof_Rafter_{i}',(x,0,center_height),(r['rafter_width_m'],r['rafter_length_m'],r['rafter_depth_m']),'07 Rafters',wood,rotation=-pitch)
+        obj = box(f'Roof_Rafter_{i}',(x,0,center_height),(r['rafter_width_m'],r['rafter_length_m'],r['rafter_depth_m']),'10 Rafters',wood,rotation=-pitch)
         for side in [-1,1]:
             top = mean_top-slope*side*by
             subtract_box(obj,(x,side*by,top-.15),(r['rafter_width_m']+.02,bw,.3))
         obj['cut_length_m'] = r['rafter_length_m']
         obj['seat_depth_max_m'] = r['seat_depth_at_centre_m']+slope*bw/2
     top_plane = bottom_plane+r['rafter_depth_m']/math.cos(pitch)
-    for i,y in enumerate([-1.1,-.55,0,.55,1.1]):
-        box(f'Purlin_{i}',(0,y,top_plane-slope*y+r['purlin_depth_m']/(2*math.cos(pitch))),(3.0,r['purlin_width_m'],r['purlin_depth_m']),'08 Purlins',wood,rotation=-pitch)
-    add_roof_covering(r, pitch, top_plane, derived)
+    # Eave purlins sit over each bearer, outer face on the wall line, closing the roof
+    # edge above the rafter bays so those bays can become mesh-covered vents.
+    eave_y = d/2-r['purlin_width_m']/2
+    purlin_ys = sorted(r['field_purlin_centres_y']+[-eave_y,eave_y])
+    for i,y in enumerate(purlin_ys):
+        obj = box(f'Purlin_{i}',(0,y,top_plane-slope*y+r['purlin_depth_m']/(2*math.cos(pitch))),(3.0,r['purlin_width_m'],r['purlin_depth_m']),'11 Purlins',wood,rotation=-pitch)
+        obj['purlin_role'] = 'eave closure and sheet fixing line' if abs(abs(y)-eave_y)<1e-9 else 'field purlin'
+    derived['purlin_centres_y_m'] = purlin_ys
+    geo = {'post_x':post_x,'post_y':post_y,'pole_radius':rad,'clearance':clear,
+           'front_wall_top':r['front_bearer_top_m']-bh,'rear_wall_top':r['rear_bearer_top_m']-bh,
+           'rafter_underside_at_origin':bottom_plane,'roof_slope':slope}
+    from wall_layout import add_wall_layout
+    add_wall_layout(cfg,box,finish,collection,wood,derived,geo)
+    add_roof_covering(r, pitch, top_plane, purlin_ys, derived)
     # No fictional hangers/bracing: unresolved connections are explicit scene metadata and docs.
     s['pending_connections'] = 'Joist and doubled-edge hangers; blocking fixings; roof restraints; temporary/permanent bracing; footing design'
     bpy.context.view_layer.update()
     # Validate the static final state before animation can conceal an error.
     from validate_coop import validate_geometry
     validation = validate_geometry(s, cfg, derived)
-    schedule = {'01 Posts':(20,55),'02 Floor bearers':(80,105),'03 Floor bolts':(120,145),'04 Floor joists and blocking':(160,190),'06 Roof bearers':(330,360),'07 Rafters':(390,415),'08 Purlins':(445,465),'09 Roof isolation':(485,500)}
+    schedule = {'01 Posts':(20,55),'02 Floor bearers':(80,105),'03 Floor bolts':(120,145),'04 Floor joists and blocking':(160,190),'05b Wall sole plates':(335,350),'06 Wall studs':(365,390),'07 Opening rails':(405,425),'07b Upper infill studs':(430,435),'08 Wall top plates':(440,460),'09 Roof bearers':(510,535),'10 Rafters':(555,580),'11 Purlins':(600,620),'12 Roof isolation':(640,655)}
     for obj in PARTS:
         phase = obj['phase']
         if phase in schedule:
             start,end = schedule[phase]
             offset = (0,0,1.2)
+            if phase=='07 Opening rails':
+                if obj.name.startswith(('Wall_Left','Wall_Right')):
+                    offset=(-.5 if obj.name.startswith('Wall_Left') else .5,0,0)
+                else:
+                    offset=(0,-.5 if 'Front' in obj.name else .5,0)
             if obj['kind']=='hardware':
                 side = -1 if 'Front' in obj.name else 1
                 offset = (0,side*.35,0)
+            if obj.name.startswith('Bearer_'):
+                # The pole is only flatted over the bearer depth; above it the full
+                # round stands proud of the bearer face. Bring the bearer in from
+                # outside onto its shoulders instead of sliding it down the poles.
+                offset = (0,(-1 if 'Front' in obj.name else 1)*.5,0)
             animate(obj,start,end,offset)
     for obj in PARTS:
         if obj.get('kind') in ('roof_sheet','roof_fleece'):
-            start=515+obj['sheet_index']*35
+            start=675+obj['sheet_index']*45
             animate(obj,start,start+25,offset=(0,0,.85))
     # Lower panels between rows first, then move the open notches onto the poles.
     final = back.location.copy()
@@ -334,7 +381,7 @@ def main():
     for obj in PARTS:
         if obj.name.startswith('Ply_Cantilever'):
             animate(obj,307,320,offset=(0,0,.7))
-    for name,frame in [('01 Posts — temporary bracing required',20),('02 Bearers',80),('03 Bolts — illustrative',120),('04 Joists and blocking — connectors pending',160),('05 Notched plywood',215),('06 Roof bearers',330),('07 Seated rafters',390),('08 Purlins',445),('09 Purlin isolation — bracing/fixings prerequisite',485),('10 Roof sheet 1',515),('10 Roof sheet 2',550),('10 Roof sheet 3',585),('10 Roof sheet 4',620),('11 Review — fixings/flashings/walls pending',660)]:
+    for name,frame in [('01 Posts — footings and temporary bracing prerequisite',20),('02 Bearers',80),('03 Bolts — illustrative',120),('04 Joists and blocking — connectors pending',160),('05 Notched plywood',215),('06 Wall sole plates',335),('07 Wall studs and opening jambs',365),('08 Opening headers',405),('08b Upper infill studs',430),('09 Wall top plates',440),('HOLD: permanent bracing and connections must be resolved',480),('10 Roof bearers',510),('11 Seated rafters',555),('12 Purlins, including eave purlins',600),('13 Purlin isolation',640),('14 Roof sheet 1',675),('14 Roof sheet 2',720),('14 Roof sheet 3',765),('14 Roof sheet 4',810),('15 Review — nest shells and enclosure next',860)]:
         s.timeline_markers.new(name,frame=frame)
     from validate_coop import validate_animation
     validation.update(validate_animation())
@@ -342,10 +389,10 @@ def main():
     bpy.context.view_layer.update()
     camdata = bpy.data.cameras.new('Assembly camera')
     camera = bpy.data.objects.new('Assembly camera',camdata)
-    collection('12 Presentation').objects.link(camera)
+    collection('14 Presentation').objects.link(camera)
     camera.location = (5,-7,z+3.4)
-    camera.rotation_euler = (Vector((0,0,z+.35))-camera.location).to_track_quat('-Z','Y').to_euler()
-    camdata.type='ORTHO'; camdata.ortho_scale=5.2
+    camera.rotation_euler = (Vector((0,0,z+.7))-camera.location).to_track_quat('-Z','Y').to_euler()
+    camdata.type='ORTHO'; camdata.ortho_scale=6.2
     s.camera = camera
     s.render.engine = 'BLENDER_WORKBENCH'
     s.display.shading.light = 'STUDIO'
@@ -370,6 +417,8 @@ def main():
     configtext.write(json.dumps(cfg,indent=2))
     report = {'config':cfg,'derived':derived,'validation':validation,'parts':[{'name':o.name,'kind':o['kind'],'phase':o['phase'],'bounds_m':bounds(o),'cut_length_m':o.get('cut_length_m')} for o in PARTS]}
     (ROOT/'generated').mkdir(exist_ok=True)
+    from wall_cut_schedule import write_schedule
+    report['derived']['wall_stock_allowance']=write_schedule(report)
     (ROOT/'generated'/'model-report.json').write_text(json.dumps(report,indent=2)+'\n')
     args.output.parent.mkdir(parents=True,exist_ok=True)
     bpy.context.preferences.filepaths.save_version=0
@@ -377,9 +426,13 @@ def main():
     if args.render:
         s.render.filepath=str(ROOT/'generated'/'assembly-preview.png')
         bpy.ops.render.render(write_still=True)
-        s.frame_set(600)
+        s.frame_set(780)
         s.render.filepath=str(ROOT/'generated'/'roof-installation.png')
         bpy.ops.render.render(write_still=True)
+        for frame,name in [(465,'wall-framing.png'),(200,'floor-framing.png'),(240,'floor-installation.png')]:
+            s.frame_set(frame)
+            s.render.filepath=str(ROOT/'generated'/name)
+            bpy.ops.render.render(write_still=True)
         s.frame_set(s.frame_end)
     print('COOP_BUILD_OK', json.dumps(validation))
 

@@ -81,7 +81,9 @@ def validate_geometry(scene,cfg,derived):
     shelf=(f['bearer_length_m']-f['width_m'])/2-f['sheet_gap_m']
     assert front>0 and shelf>0
     assert 2*shelf+2*f['saw_kerf_m']<=remaining+1e-8
-    roof_results=validate_roof(scene,cfg)
+    wall_results=validate_walls(scene,cfg)
+    roof_results={**wall_results,**validate_roof(scene,cfg),**validate_pole_clearance(scene,cfg),
+                  **validate_wall_tops(scene,cfg),**validate_eave_vents(scene,cfg)}
     return {**roof_results,'solid_pairs_checked':checked,'solid_intersections':0,'notched_panels_checked':2,'rafter_bearing_seats_checked':12,'post_stock_and_embedment_checked':6,'two_sheet_kerf_check':'passed','structural_capacity':'not evaluated'}
 
 
@@ -101,7 +103,7 @@ def validate_animation():
                 if v>1e-8:issues.append([frame,panel.name,other.name,v])
     assert not issues,f'Plywood installation collisions: {issues[:10]}'
     roof_pairs=0
-    for frame in range(485,s.frame_end+1):
+    for frame in range(640,s.frame_end+1):
         s.frame_set(frame);bpy.context.view_layer.update()
         moving=[o for o in s.objects if o.get('kind')=='roof_sheet' and o.get('assembly_start',0)<=frame<=o.get('assembly_end',0)]
         installed=[o for o in s.objects if o.get('kind') in ('roof_sheet','timber') and o.get('assembly_end',9999)<frame]
@@ -109,27 +111,44 @@ def validate_animation():
             for other in installed:
                 roof_pairs+=1
                 assert intersection_volume(o,other)<1e-9,('roof path',frame,o.name,other.name)
-    for frame in (1,465,514,540,549,575,584,610,619,645,680):
+    for frame in (1,465,674,700,719,745,764,790,809,835,900):
         s.frame_set(frame);bpy.context.view_layer.update()
         for obj in s.objects:
             if obj.get('kind') in ('roof_sheet','roof_fleece','roof_separator'):
                 expected=frame<obj['assembly_start']
                 assert obj.hide_render==expected and obj.hide_viewport==expected,(frame,obj.name,'visibility')
+    # Timber installation paths: floor framing, walls and roof framing must not pass
+    # through anything already installed (plywood and roof sheets are checked above).
+    wall_pairs=0;framing_pairs=0
+    for first,last,label in [(80,190,'floor framing'),(335,460,'wall'),(510,620,'roof framing')]:
+        for frame in range(first,last+1):
+            s.frame_set(frame);bpy.context.view_layer.update()
+            moving=[o for o in s.objects if o.get('kind')=='timber' and 'assembly_start' in o and o['assembly_start']<=frame<=o['assembly_end']]
+            installed=[o for o in s.objects if o.get('kind') in ('post','timber','plywood') and o.get('assembly_end',9999)<frame]
+            for o in moving:
+                for other in installed:
+                    if label=='wall': wall_pairs+=1
+                    else: framing_pairs+=1
+                    assert intersection_volume(o,other)<1e-8,(label+' installation collision',frame,o.name,other.name)
+    ends={phase:max(o['assembly_end'] for o in s.objects if o.get('phase')==phase) for phase in ('08 Wall top plates','11 Purlins')}
+    assert ends['08 Wall top plates']<min(o['assembly_start'] for o in s.objects if o.get('phase')=='09 Roof bearers')
+    assert ends['11 Purlins']<min(o['assembly_start'] for o in s.objects if o.get('kind')=='roof_sheet')
     # Assembled parts must stay fixed until the end of the scene.
-    for frame in [55,105,145,190,250,300,320,360,415,465,500,540,575,610,645,680]:
+    for frame in [55,105,145,190,250,300,320,350,390,425,460,535,580,620,655,700,745,790,835,900]:
         s.frame_set(frame);bpy.context.view_layer.update()
         for obj in s.objects:
             if obj.get('assembly_end',s.frame_end+1)<=frame:
                 assert (obj.location-Vector(obj['final_location'])).length<1e-6,(frame,obj.name)
     s.frame_set(s.frame_end);bpy.context.view_layer.update()
-    return {'roof_path_pairs_checked':roof_pairs,'roof_path_intersections':0,'plywood_path_pairs_checked':checked,'plywood_path_intersections':0,'assembled_holds':'passed'}
+    return {'wall_path_pairs_checked':wall_pairs,'wall_path_intersections':0,'framing_path_pairs_checked':framing_pairs,'framing_path_intersections':0,'construction_phase_order':'passed','roof_path_pairs_checked':roof_pairs,'roof_path_intersections':0,'plywood_path_pairs_checked':checked,'plywood_path_intersections':0,'assembled_holds':'passed'}
 
 
 def validate_config(cfg):
     assert cfg['schema_version']==1, 'Unsupported configuration version'
     f=cfg['floor']
-    # The first repair intentionally retains the reviewed stock/cutting layout.
-    fixed={'width_m':2.4,'depth_m':1.8,'bearer_length_m':3.0,'timber_width_m':.05,'timber_depth_m':.15}
+    # The reviewed platform/stock layout is retained. The section changed deliberately
+    # to dressed 140 x 45 on 25 Sep 2026 (AUDIT.md); joints and cut plan were revisited.
+    fixed={'width_m':2.4,'depth_m':1.8,'bearer_length_m':3.0,'timber_width_m':.045,'timber_depth_m':.14}
     for key,value in fixed.items():
         assert math.isclose(f[key],value,abs_tol=1e-9), f'{key}: revise the joint/cutting layout and checks before changing this baseline'
     for group in ('floor','posts','roof','hardware'):
@@ -143,6 +162,14 @@ def validate_config(cfg):
     pitch=math.atan2(cfg['roof']['front_bearer_top_m']-cfg['roof']['rear_bearer_top_m'],f['depth_m']-f['timber_width_m'])
     assert math.degrees(pitch)>=8, 'Corrugate design intent needs at least 8 degrees; product/load checks still required'
     assert cfg['roof']['seat_depth_at_centre_m']>math.tan(pitch)*f['timber_width_m']/2
+    # Pole tolerance rule: the flat must leave most of the pole, and the bolt must
+    # still engage its nut on the fattest accepted pole set out away from the bearer.
+    p=cfg['posts']; rad=p['diameter_m']/2
+    assert p['bearer_flat_depth_m']<=rad/3,'bearer flat removes too much pole'
+    assert p['bearer_flat_depth_m']>p['setout_tolerance_m'],'flat must absorb set-out towards the bearer'
+    through=f['timber_width_m']+rad+p['diameter_allowance_m']/2+(rad-p['bearer_flat_depth_m'])+p['setout_tolerance_m']
+    washer_nut,min_thread=.004+.010,.005
+    assert through+washer_nut+min_thread<=cfg['hardware']['bolt_length_m'],('bolt too short for worst-case pole',through)
 
 
 def validate_roof(scene,cfg):
@@ -170,5 +197,126 @@ def validate_roof(scene,cfg):
             assert intersection_volume(o,other)<1e-9,('roof collision',o.name,other.name)
             pairs+=1
     # Corrugations run down the fall, with each purlin inside the sheet run.
-    assert r['sheet_length_m']/2>1.1/math.cos(pitch)+r['purlin_width_m']/2
+    outer=max(abs(y) for y in r['field_purlin_centres_y'])
+    assert r['sheet_length_m']/2>outer/math.cos(pitch)+r['purlin_width_m']/2
     return {'roof_sheets_checked':4,'roof_static_pairs_checked':pairs,'roof_intersections':0}
+
+
+def validate_walls(scene,cfg):
+    walls=[o for o in scene.objects if o.get('wall_member')]
+    assert len(walls)>=40, 'Wall framing missing'
+    # Every sole plate bears directly on floor ply; all frame pieces are solid meshes.
+    floor=cfg['floor']['framing_top_m']+cfg['floor']['ply_thickness_m']
+    for o in walls:
+        assert volume(o.data)>1e-7,(o.name,'degenerate member')
+        if o.name.endswith('_Sole'):
+            assert math.isclose(bounds(o)[0][2],floor,abs_tol=1e-6),(o.name,'floating sole plate')
+    assert len([o for o in scene.objects if o.name.startswith('Future_Nest_')])==4
+    import json
+    openings=json.loads(scene['layout_openings_json'])
+    assert len(openings)==8
+    for opening in openings:
+        x,y=opening['center_xy_m']; width=opening['clear_width_m']; height=opening['clear_height_m']
+        side=opening['kind']=='nest entrance'
+        bpy.ops.mesh.primitive_cube_add(size=1,location=(x,y,opening['sill_z_m']+height/2))
+        probe=bpy.context.object
+        probe.dimensions=(.088,width-.00002,height-.00002) if side else (width-.00002,.088,height-.00002)
+        bpy.ops.object.transform_apply(location=False,rotation=False,scale=True)
+        bpy.context.view_layer.update()
+        try:
+            for wall in walls:
+                assert intersection_volume(probe,wall)<1e-8,('blocked opening',opening['name'],wall.name)
+        finally:
+            mesh=probe.data;bpy.data.objects.remove(probe,do_unlink=True);bpy.data.meshes.remove(mesh)
+
+    return {'wall_members_checked':len(walls),'nest_clearance_guides':4,'clear_openings_checked':8}
+
+
+def _probe_box(center,size):
+    bpy.ops.mesh.primitive_cube_add(size=1,location=center)
+    probe=bpy.context.object
+    probe.dimensions=size
+    bpy.ops.object.transform_apply(location=False,rotation=False,scale=True)
+    bpy.context.view_layer.update()
+    return probe
+
+
+def _remove(obj):
+    mesh=obj.data;bpy.data.objects.remove(obj,do_unlink=True);bpy.data.meshes.remove(mesh)
+
+
+def validate_pole_clearance(scene,cfg):
+    """Pole tolerance rule: only the bearers may touch a pole (on its cut flat)."""
+    p=cfg['posts']
+    envelope=p['diameter_m']/2+p['diameter_allowance_m']/2+p['setout_tolerance_m']
+    others=[o for o in scene.objects if o.get('kind') in ('timber','plywood')]
+    checked=0
+    for post in [o for o in scene.objects if o.get('kind')=='post']:
+        row='Front' if 'Front' in post.name else 'Back'
+        bearing={'Bearer_'+row,'Roof_Bearer_'+row}
+        lo,hi=bounds(post)
+        bpy.ops.mesh.primitive_cylinder_add(vertices=64,radius=envelope-.0005,depth=hi[2]-lo[2],
+            location=(post.location.x,post.location.y,(lo[2]+hi[2])/2))
+        probe=bpy.context.object
+        bpy.context.view_layer.update()
+        try:
+            for o in others:
+                if o.name in bearing:
+                    continue
+                checked+=1
+                assert intersection_volume(probe,o)<1e-9,('pole clearance',post.name,o.name)
+        finally:
+            _remove(probe)
+    return {'pole_clearance_pairs_checked':checked,'pole_clearance_m':envelope-p['diameter_m']/2}
+
+
+def _roof_planes(cfg):
+    f,r=cfg['floor'],cfg['roof']
+    by=(f['depth_m']-f['timber_width_m'])/2
+    pitch=math.atan2(r['front_bearer_top_m']-r['rear_bearer_top_m'],2*by)
+    under0=(r['front_bearer_top_m']+r['rear_bearer_top_m'])/2-r['seat_depth_at_centre_m']
+    return by,math.tan(pitch),under0,under0+r['rafter_depth_m']/math.cos(pitch)
+
+
+def validate_wall_tops(scene,cfg):
+    """Top plates must meet the roof members rather than stop short of them."""
+    f,r=cfg['floor'],cfg['roof']
+    _,slope,under0,_=_roof_planes(cfg)
+    checked=0
+    for row,top in [('Front',r['front_bearer_top_m']),('Rear',r['rear_bearer_top_m'])]:
+        for bay in ('Left','Right'):
+            o=bpy.data.objects[f'Wall_{row}_{bay}_Top']
+            assert math.isclose(bounds(o)[1][2],top-f['timber_depth_m'],abs_tol=1e-6),(o.name,'gap under roof bearer')
+            checked+=1
+    for label in ('Left','Right'):
+        o=bpy.data.objects[f'Wall_{label}_Top']
+        tops=[o.matrix_world@v.co for v in o.data.vertices]
+        tops=[v for v in tops if v.z>=max(t.z for t in tops if abs(t.y-v.y)<1e-6)-1e-9]
+        for v in tops:
+            assert math.isclose(v.z,under0-slope*v.y,abs_tol=1e-6),(o.name,'gap under edge rafter')
+        checked+=1
+    return {'wall_top_plates_meeting_roof':checked}
+
+
+def validate_eave_vents(scene,cfg):
+    """Rafter bays above both roof bearers stay clear for mesh-covered vents."""
+    f,r=cfg['floor'],cfg['roof']
+    by,slope,_,top0=_roof_planes(cfg)
+    bw=f['timber_width_m']
+    rafters=sorted([o for o in scene.objects if o.name.startswith('Roof_Rafter_')],key=lambda o:o.location.x)
+    solids=[o for o in scene.objects if o.get('kind') in ('timber','post','plywood')]
+    area=0.0;count=0
+    for side,top in [(-1,r['front_bearer_top_m']),(1,r['rear_bearer_top_m'])]:
+        # Lowest point of the rafter top plane across the bearer width.
+        y_low=side*(by+bw/2) if side>0 else side*(by-bw/2)
+        height=top0-slope*y_low-top
+        for a,b in zip(rafters,rafters[1:]):
+            x0=bounds(a)[1][0];x1=bounds(b)[0][0]
+            probe=_probe_box(((x0+x1)/2,side*by,top+height/2),(x1-x0-.0002,bw-.0002,height-.0002))
+            try:
+                for o in solids:
+                    assert intersection_volume(probe,o)<1e-9,('eave vent blocked',side,o.name)
+            finally:
+                _remove(probe)
+            area+=(x1-x0)*height;count+=1
+    return {'eave_vent_openings_checked':count,'eave_vent_clear_height_m':height,'eave_vent_gross_area_m2':area}
